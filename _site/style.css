@@ -1,0 +1,27 @@
+@import url("https://fonts.google.com/specimen/Roboto");
+
+* {
+    box-sizing: border-box;
+    color:aquamarine;
+}
+html, body{
+    margin:0;
+    padding:0;
+}
+.nav ul{
+    margin: 0;
+
+}
+
+.nav li {
+    display: inline;
+}
+.nav a {
+    padding: .5em;
+    color: white;
+    text-decoration: none;
+}
+.main-header {
+    background-image: url(images/futuristicbackground.jpg);
+    background-size: cover;
+}
