@@ -24,4 +24,18 @@ html, body{
 .main-header {
     background-image: url(images/futuristicbackground.jpg);
     background-size: cover;
+    max-height:100%;
+    max-width: 100%;
+    width: 2000px;
+    height: 800px;
+    float: left;
+}
+.main-button {
+    background-image: url(images/startbutton.png);
+    background-size: cover;
+    max-height:100%;
+    max-width: 10%;
+    width: 150px;
+    height: 150px;
+    float: left;
 }
