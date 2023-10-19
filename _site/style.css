@@ -1,9 +1,13 @@
-@import url("https://fonts.google.com/specimen/Roboto");
 
-* {
-    box-sizing: border-box;
-    color:aquamarine;
+@font-face {
+  font-family: 'BD Cartoon Shout';
+  src: url('BDCartoonShout.woff2') format('woff2'),
+      url('BDCartoonShout.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
+
 html, body{
     margin:0;
     padding:0;
@@ -33,25 +37,28 @@ html, body{
 
 .button {
   display: inline-block;
+  text-decoration: none;
   border-radius: 4px;
-  background-color: purple;
+  background-color: transparent;
   border: none;
-  color: violet;
+  color: white;
   text-align: center;
-  font-size: 28px;
+  font-size: 60px;
+  font-family: 'BD Cartoon Shout';
+  font-weight: bold;
   padding: 20px;
   width: 200px;
   transition: all 0.5s;
   cursor: pointer;
-  margin-left: 650px;
-  margin-bottom: -500px;
+  margin-left: 350px;
+  margin-bottom: -650px;
 }
 
 .button span {
   cursor: pointer;
   display: inline-block;
   position: relative;
-  transition: 0.5s;
+  transition: 1.2s;
 }
 
 .button span:after {
@@ -59,15 +66,30 @@ html, body{
   position: absolute;
   opacity: 0;
   top: 0;
-  right: -20px;
-  transition: 0.5s;
+  right: -50px;
+  transition: 1.2s;
 }
 
 .button:hover span {
-  padding-right: 25px;
+  padding-right: 40px;
 }
 
 .button:hover span:after {
   opacity: 1;
   right: 0;
 }
+.button a {
+    text-decoration: none; /* Remove the underline from the link */
+    color: white; /* Set the link text color to black */
+  }
+
+  .blob2-image {
+    max-height:50%;
+    max-width: 50%;
+    width: 400px;
+    height: 400px;
+    float: left;
+    margin-left: 800px;
+    margin-top: 150px;
+
+  }
