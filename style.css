@@ -93,3 +93,13 @@ html, body{
     margin-top: 150px;
 
   }
+
+  .second-header {
+    background-image: url(images/background2.png);
+    background-size: cover;
+    max-height:100%;
+    max-width: 100%;
+    width: 2000px;
+    height: 800px;
+    float: left;
+}
