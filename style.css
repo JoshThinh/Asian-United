@@ -136,14 +136,24 @@ html, body {
     text-decoration: none;
 }
 
-.main-header, .second-header {
-    background-image: url(images/background2.png);
+.main-header {
+    background-image: url(images/background.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     width: 100%; /* Set the width to 100% of the viewport width */
     height: 100vh; /* Set the height to 100% of the viewport height */
     float: left;
+}
+
+.second-header{
+  background-image: url(images/background2.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%; /* Set the width to 100% of the viewport width */
+  height: 100vh; /* Set the height to 100% of the viewport height */
+  float: left;
 }
 
 .button {
