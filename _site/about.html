@@ -3,6 +3,31 @@
     <head>
         <title>Asian.inc</title>
         <link rel="stylesheet" href="style.css" />
+        <style>
+            .main-header {
+                background-image: url(images/background.png);
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center bottom; /* Adjusted position */
+                max-height: 100%;
+                max-width: 100%;
+                float: left;
+            }
+            .box {
+                background: linear-gradient(45deg, #35218d, #a002c0);
+                display: inline-block;
+                padding: 10px;
+                font-weight: bold;
+                font-size: 14px;
+                font-family: 'Roboto', sans-serif;
+                border-radius: 10px;
+                margin-top: 30px;
+                margin-left: 500px;
+                text-transform: uppercase;
+            }
+        </style>
+        <!-- Add a link to the Roboto font -->
+        <link rel="stylesheet" href="https://fonts.google.com/specimen/Roboto">
     </head>
     <body>
         <header class="second-header">
@@ -14,8 +39,9 @@
                 </ul>
             </nav>
             <hr>
-            <h1>About us</h1>
-            <!-- remember to add a background image-->
+            <h1>
+                <div class="box">About us</div>
+            </h1>
         </header>
         <section>
         </section>

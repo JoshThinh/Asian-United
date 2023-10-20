@@ -1,4 +1,4 @@
-
+/* Font face for BD Cartoon Shout */
 @font-face {
   font-family: 'BD Cartoon Shout';
   src: url('BDCartoonShout.woff2') format('woff2'),
@@ -9,97 +9,198 @@
 }
 
 html, body{
-    margin:0;
-    padding:0;
-}
-.nav ul{
     margin: 0;
+    padding: 0;
+}
 
+.nav ul {
+    margin: 0;
 }
 
 .nav li {
     display: inline;
 }
+
 .nav a {
     padding: 13em;
     color: white;
     text-decoration: none;
 }
+
 .main-header {
-    background-image: url(images/background.png);
+    background-image: url(images/background2.png);
     background-size: cover;
-    max-height:100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh; /* Set the height to 100% of the viewport height */
     max-width: 100%;
-    width: 2000px;
-    height: 800px;
     float: left;
 }
 
 .button {
-  display: inline-block;
-  text-decoration: none;
-  border-radius: 4px;
-  background-color: transparent;
-  border: none;
-  color: white;
-  text-align: center;
-  font-size: 60px;
-  font-family: 'BD Cartoon Shout';
-  font-weight: bold;
-  padding: 20px;
-  width: 200px;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin-left: 350px;
-  margin-bottom: -650px;
+    display: inline-block;
+    text-decoration: none;
+    border-radius: 4px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 60px;
+    font-family: 'BD Cartoon Shout';
+    font-weight: bold;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin-left: 350px;
+    margin-bottom: -650px;
 }
 
 .button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 1.2s;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 1.2s;
 }
 
 .button span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -50px;
-  transition: 1.2s;
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -50px;
+    transition: 1.2s;
 }
 
 .button:hover span {
-  padding-right: 40px;
+    padding-right: 40px;
 }
 
 .button:hover span:after {
-  opacity: 1;
-  right: 0;
+    opacity: 1;
+    right: 0;
 }
+
 .button a {
     text-decoration: none; /* Remove the underline from the link */
     color: white; /* Set the link text color to black */
-  }
+}
 
-  .blob2-image {
-    max-height:50%;
+.blob2-image {
+    max-height: 50%;
     max-width: 50%;
     width: 400px;
     height: 400px;
     float: left;
     margin-left: 800px;
     margin-top: 150px;
+}
 
-  }
-
-  .second-header {
+.second-header {
     background-image: url(images/background2.png);
     background-size: cover;
-    max-height:100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh; /* Set the height to 100% of the viewport height */
     max-width: 100%;
-    width: 2000px;
-    height: 800px;
     float: left;
+}
+/* Font face for BD Cartoon Shout */
+@font-face {
+  font-family: 'BD Cartoon Shout';
+  src: url('BDCartoonShout.woff2') format('woff2'),
+      url('BDCartoonShout.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%; /* Set the body to fill the width */
+    height: 100%; /* Set the body to fill the height */
+}
+
+.nav ul {
+    margin: 0;
+}
+
+.nav li {
+    display: inline;
+}
+
+.nav a {
+    padding: 13em;
+    color: white;
+    text-decoration: none;
+}
+
+.main-header, .second-header {
+    background-image: url(images/background2.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%; /* Set the width to 100% of the viewport width */
+    height: 100vh; /* Set the height to 100% of the viewport height */
+    float: left;
+}
+
+.button {
+    display: inline-block;
+    text-decoration: none;
+    border-radius: 4px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 60px;
+    font-family: 'BD Cartoon Shout';
+    font-weight: bold;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin-left: 350px;
+    margin-bottom: -650px;
+}
+
+.button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 1.2s;
+}
+
+.button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -50px;
+    transition: 1.2s;
+}
+
+.button:hover span {
+    padding-right: 40px;
+}
+
+.button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+.button a {
+    text-decoration: none;
+    color: white;
+}
+
+.blob2-image {
+    max-height: 50%;
+    max-width: 50%;
+    width: 400px;
+    height: 400px;
+    float: left;
+    margin-left: 800px;
+    margin-top: 150px;
 }
