@@ -4,6 +4,26 @@
         <title>Asian.inc</title>
         <link rel="stylesheet" href="style.css" />
         <script src="button.js"></script>
+        <style>
+            .main-header {
+                background-image: url(images/background.png);
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+                height: 100vh;
+                max-width: 100%;
+                float: left;
+            }
+
+            /* Set the text color to white and adjust position for the "About us" heading */
+            .box {
+                color: white;
+                margin-top: 20px; /* Move down 20 pixels */
+                margin-left: 20px; /* Move right 20 pixels */
+            }
+        </style>
+        <!-- Add a link to the Roboto font -->
+        <link rel="stylesheet" href="https://fonts.google.com/specimen/Roboto">
     </head>
     <body>
         <header class="second-header">
@@ -11,8 +31,11 @@
             <button onclick="about()">About</button>
             <button onclick="home()">Home</button>
             <hr>
-            <h1>Games</h1>
-            <!-- remember to add a background image-->
+            <h1>
+                <div class="box">GAMES</div>
+            </h1>
         </header>
+        <section>
+        </section>
     </body>
 </html>
