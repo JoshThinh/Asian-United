@@ -214,3 +214,41 @@
       margin-left: 800px;
       margin-top: 150px;
   }
+  /* Your existing site-wide styles go here */
+
+/* Add a new section for the game styles */
+.game-container {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-size: cover;
+    border: 1px solid #333;
+    padding: 20px;
+    text-align: center;
+}
+
+.game-container canvas {
+    border: 2px solid #333;
+}
+
+.game-container #input-container {
+    margin-top: 20px;
+}
+
+.game-container input {
+    width: 50px;
+    padding: 5px;
+}
+
+.game-container button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.game-container #message {
+    margin-top: 20px;
+}
+
+/* Additional game-specific styles */
