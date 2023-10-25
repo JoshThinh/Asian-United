@@ -1,0 +1,18 @@
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  async function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+   }
+  async function loop(){
+    while (true){
+      await sleep(3000)
+      axios.get('https://asianunited.stu.nighthawkcodingsociety.com/api/jokes/random')
+      .then(response => {
+      console.log(response.data);
+      document.getElementById('api').textContent = response.data;
+    })
+    }
+  }
+  loop();
+</script>
+<center><p id="api" style="font-size:100px"></p></center>
