@@ -251,4 +251,61 @@
     margin-top: 20px;
 }
 
+/* Your existing site-wide styles go here */
+
+/* Add a new section for the game styles */
+.game-container {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-size: cover;
+    border: 1px solid #333;
+    padding: 20px;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.game-container canvas {
+    border: 2px solid #333;
+}
+
+.game-container #input-container {
+    margin-top: 20px;
+}
+
+.game-container input {
+    width: 50px;
+    padding: 5px;
+}
+
+.game-container button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.game-container #message {
+    margin-top: 20px;
+}
+
 /* Additional game-specific styles */
+
+/* Set background2.png as the background image for the body */
+body {
+    background-image: url(images/background2.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* The rest of your CSS styles here */
+/* ... */

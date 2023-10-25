@@ -59,7 +59,7 @@ function drawGrid() {
 function drawTarget() {
     ctx.beginPath();
     ctx.arc(targetX, targetY, 10, 0, Math.PI * 2);
-    ctx.fillStyle = dotBlue ? "blue" : "transparent";
+    ctx.fillStyle = dotBlue ? "blue" : "transparent"; // Set the dot color to transparent
     ctx.fill();
     ctx.closePath();
 }

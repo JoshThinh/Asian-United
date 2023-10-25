@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Moving Target Guessing Game</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Asian.inc</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="button.js"></script>
 </head>
 <body>
-    <h1>Welcome to the Moving Target Guessing Game!</h1>
-    <p>Press Enter to start...</p>
-    <p>Moving Target Guessing Game - Hit the target by moving in the X and Y axes.</p>
-    <canvas id="game-canvas" width="400" height="400"></canvas>
-    <div id="input-container">
-        <input type="number" id="guessX" placeholder="Move X (-20 to 20)">
-        <input type="number" id="guessY" placeholder="Move Y (-20 to 20)">
-        <button id="moveButton">Move</button>
-        <button id="resetButton">Restart</button>
+    <header class="second-header">
+        <button onclick="game()">Games</button>
+        <button onclick="about()">About</button>
+        <button onclick="home()">Home</button>
+        <hr>
+    </header>
+    <div class="game-container">
+        <canvas id="game-canvas" width="400" height="400"></canvas>
+        <div id="input-container">
+            <input type="number" id="guessX" placeholder="Move X (-20 to 20)">
+            <input type="number" id="guessY" placeholder="Move Y (-20 to 20)">
+            <button id="moveButton">Move</button>
+            <button id="resetButton">Restart</button>
+        </div>
+        <div id="message"></div>
     </div>
-    <div id="message"></div>
     <script src="script.js"></script>
 </body>
 </html>
