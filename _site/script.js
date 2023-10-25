@@ -36,7 +36,7 @@ function clearCanvas() {
 }
 
 function drawGrid() {
-    ctx.strokeStyle = "#ccc";
+    ctx.strokeStyle = "#ccc"; 
     ctx.lineWidth = 1;
 
     // Draw vertical grid lines
