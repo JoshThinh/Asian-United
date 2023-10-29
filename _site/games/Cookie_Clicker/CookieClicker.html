@@ -1,0 +1,394 @@
+<html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<head>
+<link rel="stylesheet" href="/static/cookiestyle.css">  
+</head>
+<script>
+var count = 0;
+var rate = 1;
+var cost = 100;
+var clickerCost = 1000;
+var clickerCount = 0;
+var doubleCount = 0;
+var dbCost = 1500;
+var plusCount = 0;
+var twoDouble = 0;
+async function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+   }
+function dbChance() { 
+  if (count >= dbCost && doubleCount < 4.999){
+    count = count - dbCost
+    dbCost +=1500
+    doubleCount += 0.05
+    //console.log(Number(doubleCount.toFixed(0)))
+    document.getElementById("xdbCount").innerHTML = "x" + Number((doubleCount*20).toFixed(0));
+    document.getElementById("cookieDisplay").innerHTML = count + " Alex Coins";
+    document.getElementById("newdbCost").innerHTML = "Next Increase: " + dbCost;
+  }
+  else {
+        document.getElementById("buy3").animate(
+            [
+                { background: '#ff0000'}
+            ] , {
+                duration: 20
+            }
+        )
+    }
+}
+async function clickers() {
+    while (true) {
+        await sleep(1000);
+        if(probability(doubleCount)) {
+          multi = 2;
+
+          if (probability(doubleCount-1)) {
+            multi = 3
+            if (probability(doubleCount-2)) { // 25% chance for quadruple drops
+            multi = 4;
+            if (probability(doubleCount-3)) { // 25% chance for quadruple drops
+              multi = 5;
+              }
+              if (probability(doubleCount-4)) { // 25% chance for quadruple drops
+                multi = 6;
+            }
+            }
+          }
+        }
+        else { multi = 1}
+        count = count + (rate*clickerCount*multi);
+        document.getElementById("cookieDisplay").innerHTML = count + " Alex Coins"   
+  }
+}
+var probability = function(n) {
+     return !!n && Math.random() <= n;
+}
+function addGen(){
+    if (count >= cost){
+        count = count - cost
+        cost +=100
+        plusCount +=1
+        rate +=1
+        document.getElementById("xplusCount").innerHTML = "x" + plusCount;
+        document.getElementById("cookieDisplay").innerHTML = count + " Alex Coins";
+        document.getElementById("newCost").innerHTML = "Next increase: " + cost;
+    }
+    
+    else {
+        document.getElementById("buy1").animate(
+            [
+                { background: '#ff0000'}
+            ] , {
+                duration: 20
+            }
+        )
+    }
+    }
+function swapper(){
+    count = count + rate
+    document.getElementById("cookieDisplay").innerHTML = count + " Alex Coins";
+}
+function buyClicker(){
+    if (count >= clickerCost){
+        count = count - clickerCost;
+        clickerCost +=1000;
+        clickerCount +=1;
+        document.getElementById("xclickerCount").innerHTML = "x" + clickerCount;
+        document.getElementById("cookieDisplay").innerHTML = count + " Alex Coins";
+        document.getElementById("newClicker").innerHTML = "Next increase: " + clickerCost;
+    }
+  
+    else {
+        document.getElementById("buy2").animate(
+            [
+                { background: '#ff0000'}
+            ] , {
+                duration: 20
+            }
+        )
+    }
+  }
+  function build() {
+  let matList = [];
+  let buildList = ["top", "mid", "bot"];
+  
+  for (let i = 0; i < buildList.length; i++) {
+    matList[i] = (i + 1) * 20;
+  }
+  console.log(matList);
+}
+
+
+function  dev(){
+    count = 10000000000
+}   
+var rolls = ["Rate Up", "Auto Clicker", "Doubler", "ALEX DOLLAR"];
+var rollCount = []
+var rolling = false;
+async function gacha() {
+  if (!rolling) { // Check if a roll is in progress
+    rolling = true;
+    var rateaddCount = 0;
+    var acCount = 0;
+    var dbCount = 0;
+    var alexCount = 0;
+
+    if (count >= 100000) {
+      rollCount = [];
+      count = count - 100000;
+      var i = 1;
+      document.getElementById("rolls").innerHTML = "You got...<br>";
+
+      while (i <= 10) {
+        var roll = Math.floor(Math.random() * 100);
+        console.log(roll);
+
+        if (roll < 60) {
+          rollCount.push(rolls[0]);
+        } else if (roll >= 60 && roll <= 90) {
+          rollCount.push(rolls[1]);
+        } else if (roll > 90 && roll <= 98) {
+          rollCount.push(rolls[2]);
+        } else if (roll == 99) {
+          rollCount.push(rolls[3]);
+        } 
+        await sleep(75);
+        document.getElementById("rolls").innerHTML += rollCount[i - 1] + "<br>";
+        i++;
+      }
+
+      console.log(rollCount);
+
+      for (var i = 0; i < rollCount.length; i++) {
+        if (rollCount[i] == "Rate Up") {
+          rateaddCount++;
+        } else if (rollCount[i] == "Auto Clicker") {
+          acCount++;
+        } else if (rollCount[i] == "Doubler") {
+          dbCount++;
+        } else if (rollCount[i] == "ALEX DOLLAR") {
+          alexCount++;
+          disableScroll();
+          document.getElementById("alexdollar").scrollIntoView({behavior: 'smooth'});
+          await sleep (500);
+          document.getElementById("anim").animate([
+            { opacity: 0 }, // 0% keyframe
+            { opacity: 0.5 }, // 50% keyframe
+            { opacity: 1 },
+            { opacity: 1 },
+            { opacity: 1 },], // 99% keyframe
+            {duration: 3000,});
+          await sleep(3000);
+          document.getElementById("gachaSec").scrollIntoView({behavior: 'smooth'});
+          enableScroll();
+        }
+      }
+
+      document.getElementById("rolls").innerHTML +=
+        "<br>You got " +
+        rateaddCount +
+        "x Rate Ups, " +
+        acCount +
+        "x Autoclickers, " +
+        dbCount +
+        "x Doublers, and " +
+        alexCount +
+        " Alex Dollar!";
+
+      clickerCount = clickerCount + acCount;
+      rate = rate + rateaddCount;
+      plusCount = plusCount + rateaddCount;
+      doubleCount = doubleCount + dbCount/20
+      //console.log(doubleCount)
+      document.getElementById("xdbCount").innerHTML = "x" + Number((doubleCount*20).toFixed(0));
+      document.getElementById("xplusCount").innerHTML = "x" + plusCount;
+      document.getElementById("xclickerCount").innerHTML = "x" + clickerCount;
+      rollCount = [""];
+      await sleep (500)
+      rolling = false;
+    } else {
+      document.getElementById("gachaButton").animate(
+        [{ background: "#ff0000" }],
+        { duration: 20 }
+      );
+    }
+
+     // Reset the flag when the roll is complete
+  }
+}
+clickers();
+</script>
+<body style = "height: 500vh">
+<center><p id = "cookieDisplay" class = "cookieDisplay">Hello! Click the cookie to get coins!</p></center>
+<img src="/static/assets/alex.png" onclick="swapper()" class = "cookie">
+<button onclick = "addGen()" id = "buy1"><img src = "/static/assets/plus.png" class = "icon"><p id = xplusCount></p></button>
+<p id = newCost></p>
+<p id = "costMsg"></p>
+<p>Increases your <br>coins' per click!</p>
+<button onclick = "buyClicker()" id = "buy2"><img src = "/static/assets/autoclicker.png" class = "icon"><p id = xclickerCount></p></button>
+<p id = "clickercostMsg"></p>
+<p id = "newClicker"></p>
+<button onclick = "dbChance()" id = "buy3"><img src = "/static/assets/double.jpg" class = "icon"><p id = "xdbCount"></p></button>
+<p id = newdbCost></p>
+<p>Auto Clicker: <br>Clicks 1 time for you every second</p>
+<br><br>
+</body>
+<br><br>
+<button onclick = "dev()">dev butotn</button>
+<center><p id = "joke" class = "joke"></p></center><section id = gachaSec></section>
+<br><br><br><br>
+<center><button onclick = "gacha()" id = "gachaButton" class = "gachaButton"><img src = "/static/assets/alexgacha.jpg" class = "gacha"><center><strong><p style = "color: red; font-size: large; padding: 18px" >Cost: 100,000 Alex Coins</p></strong></center></button>
+<p id = rolls></p>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><section id = "alexdollar"></section><br><br><br><br><br><br><br><br><br><br>
+<img src = "/static/assets/alexdollar.png" style = "position: relative" id = "anim" class = "anim"></center>
+</html>     
+
+
+</html>
+
+<script>
+  var keys = {37: 1, 38: 1, 39: 1, 40: 1};
+
+function preventDefault(e) {
+  e.preventDefault();
+}
+
+function preventDefaultForScrollKeys(e) {
+  if (keys[e.keyCode]) {
+    preventDefault(e);
+    return false;
+  }
+}
+
+// modern Chrome requires { passive: false } when adding event
+var supportsPassive = false;
+try {
+  window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
+    get: function () { supportsPassive = true; } 
+  }));
+} catch(e) {}
+
+var wheelOpt = supportsPassive ? { passive: false } : false;
+var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
+
+// call this to Disable
+function disableScroll() {
+  window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
+  window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
+  window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
+  window.addEventListener('keydown', preventDefaultForScrollKeys, false);
+}
+
+// call this to Enable
+function enableScroll() {
+  window.removeEventListener('DOMMouseScroll', preventDefault, false);
+  window.removeEventListener(wheelEvent, preventDefault, wheelOpt); 
+  window.removeEventListener('touchmove', preventDefault, wheelOpt);
+  window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
+}
+  // Define the API URL
+  const apiUrl = 'https://asianunited.stu.nighthawkcodingsociety.com/api/jokes'; 
+
+  const fetchedJokes = [];
+  const maxJokes = 10; // Number of jokes to fetch initially
+
+  // Function to fetch a fixed number of jokes and store them
+  async function fetchInitialJokes() {
+    for (let i = 0; i < maxJokes; i++) {
+      const randomJoke = await fetchRandomJoke();
+      fetchedJokes.push(randomJoke);
+    }
+  }
+
+  // Function to fetch a random joke
+  async function fetchRandomJoke() {  
+    try {
+      const response = await fetch(apiUrl + '/random');
+      if (response.ok) {
+        const randomJoke = await response.json();
+        return randomJoke;
+      } else {
+        console.error('Request failed with status:', response.status);
+        return 'Failed to fetch a joke'; // Return an error message
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      return 'Error fetching a joke'; // Return an error message
+    }
+  }
+
+  async function updateJokeElement() {
+    const jokeElement = document.getElementById("joke");
+
+    if (fetchedJokes.length === 0) {
+      // Refill the array if it's empty
+      await fetchInitialJokes();
+    }
+
+    // Get and display the next joke from the array
+    const randomJoke = fetchedJokes.shift();
+    jokeElement.innerHTML = randomJoke;
+  }
+
+  // Function to fetch and update the joke element in a loop
+  async function loopJoke() {
+    while (true) {
+      await updateJokeElement();
+      await sleep(30000); // Sleep for 3 seconds (adjust the delay as needed)
+    }
+  }
+
+  // Call the function to update the joke element after a brief delay
+  setTimeout(updateJokeElement, 0);
+  loopJoke();
+  function sendScoreToAPI() {
+  const scoreData = {
+    score: count, // Your game score
+  };
+
+  fetch('http://127.0.0.1:8640/api/scores', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(scoreData),
+  })
+    .then(response => {
+      if (response.ok) {
+        // Score sent successfully
+        console.log('Score sent to the API');
+      } else {
+        // Handle error
+        console.error('Failed to send score to the API');
+      }
+    })
+    .catch(error => {
+      // Handle network error
+      console.error('Network error while sending score to the API');
+    });
+}
+function retrieveScoreFromAPI() {
+  fetch('http://127.0.0.1:8640/api/scores', {
+    method: 'GET',
+  })
+    .then(response => {
+      if (response.ok) {
+        return response.json(); // Parse the response as JSON
+      } else {
+        // Handle error
+        console.error('Failed to retrieve score data from the API');
+      }
+    })
+    .then(data => {
+      // Use the retrieved score data (e.g., update the game UI)
+      const retrievedScores = data.scores;
+      console.log('Retrieved scores:', retrievedScores);
+      // Update your game's UI or logic with the retrieved score data
+    })
+    .catch(error => {
+      // Handle network error
+      console.error('Network error while retrieving score data from the API');
+    });
+}
+
+</script>

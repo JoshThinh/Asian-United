@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Moving Target Guessing Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url('background.png'); /* Set the background image for the game container */
+            background-size: cover;
+            border: 1px solid #333;
+            padding: 20px;
+            text-align: center;
+        }
+        #target-line {
+            font-family: monospace;
+            font-size: 20px;
+            white-space: pre;
+        }
+        #input-container {
+            margin-top: 20px;
+        }
+        input {
+            width: 50px;
+            padding: 5px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        #message {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Moving Target Guessing Game!</h1>
+    <p>Press Enter to start...</p>
+    <p>Moving Target Guessing Game - Hit the target area between 1 and 100</p>
+    <div id="target-line">X------------------------------------------------------------------------------------------------------------------</div>
+    <div id="input-container">
+        <input type="number" id="guessInput" placeholder="Enter your guess" min="1" max="100">
+        <!-- The "Play the Game" button has been removed -->
+    </div>
+    <div id="message"></div>
+    
+    <script>
+        // ... (rest of the JavaScript code as before)
+    </script>
+</body>
+</html>

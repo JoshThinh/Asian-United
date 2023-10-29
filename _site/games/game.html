@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Asian.inc</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .main-header {
+            background-image: url(images/background.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100vh;
+            max-width: 100%;
+            float: left;
+        }
+
+        .box {
+            color: white;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header class="second-header">
+        <button onclick="navigate('game.html')">Games</button>
+        <button onclick="navigate('about.html')">About</button>
+        <button onclick="navigate('index.html')">Home</button>
+        <button onclick="navigate('feeling-funny.html')">Im Feelin' Funny</button>
+        <hr>
+        <h1>
+            <div class="box">GAMES</div>
+            <button onclick="navigate('guess_game.html')">Battleship Game</button>
+        </h1>
+    </header>
+
+
+    <script>
+        function navigate(url) {
+            window.location.href = url;
+        }
+    </script>
+</body>
+
+</html>
