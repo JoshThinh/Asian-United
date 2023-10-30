@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <body>
+        <header class="second-header">
+            <button onclick="game()">Games</button>
+            <button onclick="about()">About</button>
+            <button onclick="home()">Home</button>
+            <hr>
+    <meta charset="UTF-8">
+    <title>Aim Training Clicker</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* Add some basic styling for the boxes */
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            cursor: pointer;
+        }
+
+        .score {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: white; /* Set the text color to white */
+        }
+
+        #color-picker {
+            position: absolute;
+            top: 100px;
+            left: 10px;
+        }
+
+        h1 {
+            color: white; /* Set the text color to white */
+        }
+    </style>
+</head>
+<body>
+    <h1>Aim Training Clicker</h1>
+    <div id="game-area">
+        <!-- Create as many boxes as needed -->
+        <div class="box" id="box1"></div>
+        <div class="box" id="box2"></div>
+        <div class="box" id="box3"></div>
+    </div>
+    <input type="color" id="color-picker" value="#FF0000">
+    <div id="score" class="score">Score: 0</div>
+</body>
+<script>
+    // ... (rest of the JavaScript code remains the same)
+</script>
+<script>
+
+    const gameArea = document.getElementById("game-area");
+    const boxes = document.querySelectorAll(".box");
+    const scoreDisplay = document.getElementById("score");
+    const colorPicker = document.getElementById("color-picker");
+
+    let score = 0;
+
+    // Function to generate a random position within the screen
+    function getRandomPosition() {
+        const maxX = window.innerWidth - 100; // Adjust based on box width
+        const maxY = window.innerHeight - 100; // Adjust based on box height
+
+        const randomX = Math.floor(Math.random() * maxX);
+        const randomY = Math.floor(Math.random() * maxY);
+
+        return { x: randomX, y: randomY };
+    }
+
+    // Function to move the clicked box to a random position
+    function moveBox(box) {
+        const newPosition = getRandomPosition();
+        box.style.left = newPosition.x + "px";
+        box.style.top = newPosition.y + "px";
+        score++;
+        scoreDisplay.textContent = "Score: " + score;
+    }
+
+    // Event listener to move a box when clicked
+    boxes.forEach((box) => {
+        box.addEventListener("click", () => {
+            moveBox(box);
+        });
+    });
+
+    // Event listener to change box color when color is picked
+    colorPicker.addEventListener("input", (event) => {
+        const color = event.target.value;
+        boxes.forEach((box) => {
+            box.style.backgroundColor = color;
+        });
+    });
+
+    // Automatically position the boxes when the page loads
+    boxes.forEach((box) => {
+        const initialPosition = getRandomPosition();
+        box.style.left = initialPosition.x + "px";
+        box.style.top = initialPosition.y + "px";
+    });
+</script>
+</html>
+
+<script src="script.js"></script>
+</html>
