@@ -27,6 +27,20 @@
         .login-container h1 {
             color: #ffffff; /* Set the text color of "Login" to a different color */
         }
+        .login-guest-button {
+            text-align: center;
+            position: absolute;
+            bottom: 50px;
+            right: 0;
+            margin: 20px;
+        }
+        .dont-have-account-button {
+            text-align: center;
+            position: absolute;
+            bottom: 10px; /* Adjust the vertical position */
+            right: 0;
+            margin: 20px;
+        }
     </style>
 </head>
 <body>
@@ -37,12 +51,16 @@
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required><br>
 
-           
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
+
             <!-- Add more form fields as needed -->
 
             <input type="submit" value="Login">
         </form>
     </div>
+    <button class="login-guest-button"><a href="game.html">Login as Guest</a></button>
+    <button class="dont-have-account-button"><a href="signup.html">Don't Have an Account?</a></button>
     <!-- Include any footer content if needed -->
 </body>
 </html>
