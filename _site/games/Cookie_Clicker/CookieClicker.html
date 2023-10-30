@@ -1,7 +1,11 @@
 <html>
+<input type="text" id="loadUserInput" placeholder="Enter username">
+<button id="loadUserDataButton">Load User Data</button>
+<input type="text" id="usernameInput" placeholder="Enter your username">
+<button onclick="saveUserData()">Save</button>   
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <head>
-<link rel="stylesheet" href="/static/cookiestyle.css">  
+<link rel="stylesheet" href="cookiestyle.css">  
 </head>
 <script>
 var count = 0;
@@ -220,27 +224,28 @@ clickers();
 </script>
 <body style = "height: 500vh">
 <center><p id = "cookieDisplay" class = "cookieDisplay">Hello! Click the cookie to get coins!</p></center>
-<img src="/static/assets/alex.png" onclick="swapper()" class = "cookie">
-<button onclick = "addGen()" id = "buy1"><img src = "/static/assets/plus.png" class = "icon"><p id = xplusCount></p></button>
+<img src="/images/alex.png" onclick="swapper()" class = "cookie">
+<button onclick = "addGen()" id = "buy1"><img src = "/images/plus.png" class = "icon"><p id = xplusCount></p></button>
 <p id = newCost></p>
 <p id = "costMsg"></p>
 <p>Increases your <br>coins' per click!</p>
-<button onclick = "buyClicker()" id = "buy2"><img src = "/static/assets/autoclicker.png" class = "icon"><p id = xclickerCount></p></button>
+<button onclick = "buyClicker()" id = "buy2"><img src = "/images/autoclicker.png" class = "icon"><p id = xclickerCount></p></button>
 <p id = "clickercostMsg"></p>
 <p id = "newClicker"></p>
-<button onclick = "dbChance()" id = "buy3"><img src = "/static/assets/double.jpg" class = "icon"><p id = "xdbCount"></p></button>
+<br>Clicks 1 time for <br>you every second</p>
+<button onclick = "dbChance()" id = "buy3"><img src = "/images/double.jpg" class = "icon"><p id = "xdbCount"></p></button>
 <p id = newdbCost></p>
-<p>Auto Clicker: <br>Clicks 1 time for you every second</p>
+<p>Adds a chance to <br>increase clicks gained using clickers</p>
 <br><br>
 </body>
 <br><br>
 <button onclick = "dev()">dev butotn</button>
 <center><p id = "joke" class = "joke"></p></center><section id = gachaSec></section>
 <br><br><br><br>
-<center><button onclick = "gacha()" id = "gachaButton" class = "gachaButton"><img src = "/static/assets/alexgacha.jpg" class = "gacha"><center><strong><p style = "color: red; font-size: large; padding: 18px" >Cost: 100,000 Alex Coins</p></strong></center></button>
+<center><button onclick = "gacha()" id = "gachaButton" class = "gachaButton"><img src = "/images/alexgacha.jpg" class = "gacha"><center><strong><p style = "color: red; font-size: large; padding: 18px" >Cost: 100,000 Alex Coins</p></strong></center></button>
 <p id = rolls></p>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><section id = "alexdollar"></section><br><br><br><br><br><br><br><br><br><br>
-<img src = "/static/assets/alexdollar.png" style = "position: relative" id = "anim" class = "anim"></center>
+<img src = "/images/alexdollar.png" style = "position: relative" id = "anim" class = "anim"></center>
 </html>     
 
 
@@ -341,54 +346,138 @@ function enableScroll() {
   // Call the function to update the joke element after a brief delay
   setTimeout(updateJokeElement, 0);
   loopJoke();
-  function sendScoreToAPI() {
-  const scoreData = {
-    score: count, // Your game score
-  };
-
-  fetch('http://127.0.0.1:8640/api/scores', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(scoreData),
-  })
-    .then(response => {
-      if (response.ok) {
-        // Score sent successfully
-        console.log('Score sent to the API');
-      } else {
-        // Handle error
-        console.error('Failed to send score to the API');
-      }
-    })
-    .catch(error => {
-      // Handle network error
-      console.error('Network error while sending score to the API');
-    });
+async function saveUserData() {
+    const username = document.getElementById("usernameInput").value;
+    if (!username) {
+        alert("Please enter a username.");
+        return;
+    }
+    // Collect user-specific data
+    const userData = {
+        count: count,
+        rate: rate,
+        cost: cost,
+        clickerCost: clickerCost,
+        clickerCount: clickerCount,
+        doubleCount: doubleCount,
+        dbCost: dbCost,
+        plusCount: plusCount,
+    };
+    const userCount = {
+      count: count,
+    }
+    // Send user data to the API
+    await postScore(count)
+    await postData(username, userData);
 }
-function retrieveScoreFromAPI() {
-  fetch('http://127.0.0.1:8640/api/scores', {
-    method: 'GET',
-  })
-    .then(response => {
-      if (response.ok) {
-        return response.json(); // Parse the response as JSON
-      } else {
-        // Handle error
-        console.error('Failed to retrieve score data from the API');
-      }
-    })
-    .then(data => {
-      // Use the retrieved score data (e.g., update the game UI)
-      const retrievedScores = data.scores;
-      console.log('Retrieved scores:', retrievedScores);
-      // Update your game's UI or logic with the retrieved score data
-    })
-    .catch(error => {
-      // Handle network error
-      console.error('Network error while retrieving score data from the API');
-    });
+userList = []
+async function postData(username, userData) {
+    apiUrl = 'https://asianunited.stu.nighthawkcodingsociety.com/api/scores/users/${username}' 
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            console.log(result.message); // Log the response message
+            alert("User data saved successfully!");
+        } else {
+            console.error('Request failed with status:', response.status);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+async function postScore(score) {
+    const apiUrl = 'https://asianunited.stu.nighthawkcodingsociety.com/api/scores/';
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ score: score }),
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            console.log(result.message); // Log the response message
+            alert("Score saved successfully!");
+        } else {
+            console.error('Request failed with status:', response.status);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
 
+async function loadUserData(username) {
+        const apiUrl = 'https://https://asianunited.stu.nighthawkcodingsociety.com/api/scores/users/${username}';
+
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                const userData = await response.json();
+                console.log('User data loaded successfully:', userData);
+
+                // Update HTML elements and variables
+                cost = userData.cost;
+                dbCost = userData.dbCost;
+                clickerCost = userData.clickerCost;
+                count = userData.count;
+                rate = userData.rate;
+                clickerCount = userData.clickerCount;
+                doubleCount = userData.doubleCount;
+                plusCount = userData.plusCount;
+
+
+                // Update the display of HTML elements
+                document.getElementById("xclickerCount").innerHTML = "x" + clickerCount;
+                document.getElementById('xdbCount').innerHTML = "x" + Number((doubleCount*20).toFixed(0));
+                document.getElementById('cookieDisplay').innerHTML = count + ' Alex Coins';
+                document.getElementById('xplusCount').innerHTML = 'x' + plusCount;
+                document.getElementById('newCost').innerHTML = 'Next increase: ' + cost;
+                document.getElementById('newClicker').innerHTML = 'Next increase: ' + clickerCost;
+                document.getElementById('newdbCost').innerHTML = 'Next Increase: ' + dbCost;
+                // Update other HTML elements as needed
+
+                alert('User data loaded successfully!');
+            } else if (response.status === 404) {
+                // User data not found
+                console.log('User data not found for username:', username);
+                alert('User data not found.');
+            } else {
+                console.error('Request failed with status:', response.status);
+                alert('Failed to load user data.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error loading user data.');
+        }
+    }
+
+    // Event listener for the Load User Data button
+    const loadUserDataButton = document.getElementById('loadUserDataButton');
+    loadUserDataButton.addEventListener('click', () => {
+        const loadUserInput = document.getElementById('loadUserInput');
+        const username = loadUserInput.value;
+
+        if (username) {
+            loadUserData(username);
+        } else {
+            alert('Please enter a valid username.');
+        }
+    });
 </script>
