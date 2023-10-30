@@ -6,8 +6,6 @@
         /*Buttons beside start don't appear until start is clicked*/
         .binary-button {
             display: none;
-            margin: 0 auto;
-            text-align: center;
             width: 100px; /* Set the width of the buttons */
             height: 40px; /* Set the height of the buttons */
             font-size: 16px; /* Set the font size of the buttons */
@@ -18,22 +16,16 @@
         #next {
             display: none;
         }
-        #starting {
-            text-align: center;
-        }
-        .center {
-            text-align: center;
-        }
     </style>
 </head>
 <body>
-    <h1 class="center">Binary Game</h1>
-    <p class="center" id="directions">Click start to begin!</p>
-    <p class="center" id="randomNumber"></p>
+    <h1 >Binary Game</h1>
+    <p id="directions">Click start to begin!</p>
+    <p id="randomNumber"></p>
     <div id="starting">
         <button id="start" onclick="start()">Start!</button>
     </div>
-    <p class="center" id="sc"></p>
+    <p id="sc"></p>
     <div id="binary-buttons">
         <button class="binary-button" id="b5" onclick="c5()">0</button>
         <button class="binary-button" id="b4" onclick="c4()">0</button>
@@ -43,8 +35,8 @@
         <button class="binary-button" id="b0" onclick="c0()">0</button>
     </div>
     <br>
-    <button class="center" id="check" onclick="check()">Check!</button>
-    <button class="center" id="next" onclick="moveon()">Next!</button>
+    <button id="check" onclick="check()">Check!</button>
+    <button id="next" onclick="moveon()">Next!</button>
     <p id="para"></p>
 </body>
 <script>
@@ -82,7 +74,6 @@
         randNumber = randnum()
         number.innerHTML = "Number: " + randNumber
         sc.innerHTML = "Score: " + score
-        buttons.style.display = "center"
     }
 
     function randbin(num) {
