@@ -8,8 +8,8 @@ const message = document.getElementById("message");
 
 const gridSize = 20;
 const gridRange = 20;
-const hitZoneSize = 3;
-const diamondHalfSize = hitZoneSize / 2;
+const diamondHalfSize = 1;
+const hitZoneSize = 5;
 
 let centerX = canvas.width / 2;
 let centerY = canvas.height / 2;
@@ -20,11 +20,27 @@ let targetY = centerY;
 let dotX = centerX;
 let dotY = centerY;
 
-let hitAreaX;
-let hitAreaY;
-
 let dotVisible = false;
 let dotBlue = false;
+
+let score = 0; // Initialize the score
+
+const scoreboard = document.createElement("div");
+scoreboard.style.position = "absolute";
+scoreboard.style.right = "10px";
+scoreboard.style.top = "10px";
+scoreboard.style.backgroundColor = "darkgray";
+scoreboard.style.color = "white";
+scoreboard.style.padding = "10px";
+scoreboard.style.borderRadius = "5px";
+scoreboard.style.fontSize = "24px";
+scoreboard.textContent = "Score: 0";
+
+document.body.appendChild(scoreboard);
+
+function updateScoreboard() {
+    scoreboard.textContent = `Score: ${score}`;
+}
 
 function randomizeTargetPosition() {
     targetX = Math.floor(Math.random() * (canvas.width / gridSize)) * gridSize;
@@ -64,17 +80,16 @@ function drawTarget() {
     ctx.closePath();
 }
 
-function drawHitArea() {
-    if (dotVisible) {
-        // Draw a diamond-shaped hit zone
-        ctx.fillStyle = "red";
-        ctx.beginPath();
-        ctx.moveTo(hitAreaX, hitAreaY - diamondHalfSize);
-        ctx.lineTo(hitAreaX + diamondHalfSize, hitAreaY);
-        ctx.lineTo(hitAreaX, hitAreaY + diamondHalfSize);
-        ctx.lineTo(hitAreaX - diamondHalfSize, hitAreaY);
-        ctx.closePath();
-        ctx.fill();
+function drawPixelatedBoxWithCorners(x, y, size) {
+    const halfSize = Math.floor(size / 2);
+
+    for (let dx = -halfSize; dx <= halfSize; dx++) {
+        for (let dy = -halfSize; dy <= halfSize; dy++) {
+            if (Math.abs(dx) + Math.abs(dy) < halfSize) {
+                ctx.fillStyle = "red";
+                ctx.fillRect(x + dx * gridSize, y + dy * gridSize, gridSize, gridSize);
+            }
+        }
     }
 }
 
@@ -82,9 +97,7 @@ function moveTarget() {
     const moveX = parseInt(guessX.value) || 0;
     const moveY = parseInt(guessY.value) || 0;
 
-    hitAreaX = dotX;
-    hitAreaY = dotY;
-
+    // Update the hit zone position based on user input
     dotX += moveX * gridSize;
     dotY -= moveY * gridSize;
 
@@ -92,22 +105,29 @@ function moveTarget() {
     dotVisible = true; // Show the dot
     clearCanvas();
     drawGrid();
-    drawHitArea();
+    drawPixelatedBoxWithCorners(dotX, dotY, hitZoneSize); // Draw the custom hit zone
     drawTarget();
 }
+
+// ... (Previous code)
 
 function checkWin() {
     const distanceX = Math.abs(targetX - dotX);
     const distanceY = Math.abs(targetY - dotY);
 
     if (distanceX <= diamondHalfSize * gridSize && distanceY <= diamondHalfSize * gridSize) {
+        message.style.color = "white"; // Set text color to white
         message.textContent = "Congratulations! You hit the target.";
     } else {
+        message.style.color = "white"; // Set text color to white
         message.textContent = "Missed. The target is outside the hit zone.";
     }
 
     disableInputAndButton();
 }
+
+// ... (Rest of the code)
+
 
 function disableInputAndButton() {
     guessX.disabled = true;
@@ -132,12 +152,16 @@ function restartGame() {
     drawTarget();
     enableInputAndButton();
     message.textContent = "";
+    clearCanvas();
+    drawGrid();
+    drawPixelatedBoxWithCorners(dotX, dotY, hitZoneSize);
 }
 
 randomizeTargetPosition();
 clearCanvas();
 drawGrid();
 drawTarget();
+updateScoreboard();
 
 moveButton.addEventListener("click", () => {
     moveTarget();
