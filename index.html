@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Asian.inc</title>
-        <link rel="stylesheet" href="style.css"/>
-    </head>
-    <body>
-        <header class="main-header">
-            <hr>
-            <button class="button" style="vertical-align:middle"><span><a href="game.html">START</a></span></button>
-            <!-- remember to add a background image-->
-            <div>
-                <img class="blob2-image" src="images/blob2.gif">
-            </div>
-        </header>
-        <div></div> 
-    </body>
+<head>
+    <title>Asian.inc</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <header class="main-header">
+        <hr>
+        <button class="button" style="vertical-align:middle" onclick="redirectToSignup()"><span>START</span></button>
+        <div>
+            <img class="blob2-image" src="images/blob2.gif">
+        </div>
+    </header>
+    <div></div> 
+
+    <script>
+        function redirectToSignup() {
+            window.location.href = "signup.html";
+        }
+    </script>
+</body>
 </html>

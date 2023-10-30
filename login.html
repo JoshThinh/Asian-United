@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Asian.inc - Login</title>
+    <link rel="stylesheet" href="style.css"/>
+    <style>
+        body {
+            text-align: center;
+            background-image: url(images/background.png); /* Add the path to your background image */
+            background-size: cover;
+        }
+        .login-container {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #cccccc00;
+            background-color: rgba(255, 255, 255, 0); /* Adjust the alpha value (0.0 to 1.0) for transparency */
+            margin-top: 50px;
+        }
+        .login-container label {
+            color: white; /* Set the text color to white */
+        }
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            color: black; /* Set the text color to black */
+        }
+        .login-container h1 {
+            color: #ffffff; /* Set the text color of "Login" to a different color */
+        }
+    </style>
+</head>
+<body>
+    <!-- Content for Login Page -->
+    <div class="login-container">
+        <h1>Login</h1>
+        <form method="post" action="process_login.php">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
+
+            <!-- Add more form fields as needed -->
+
+            <input type="submit" value="Login">
+        </form>
+    </div>
+    <!-- Include any footer content if needed -->
+</body>
+</html>
