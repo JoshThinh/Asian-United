@@ -372,7 +372,7 @@ async function saveUserData() {
 }
 userList = []
 async function postData(username, userData) {
-    apiUrl = 'https://asianunited.stu.nighthawkcodingsociety.com/api/scores/users/${username}/'
+    apiUrl = `https://asianunited.stu.nighthawkcodingsociety.com/api/scores/users/${username}/`;
     try {
         const response = await fetch(apiUrl, {
             method: 'POST',
@@ -385,6 +385,7 @@ async function postData(username, userData) {
         if (response.ok) {
             const result = await response.json();
             console.log(result.message); // Log the response message
+            
             alert("User data saved successfully!");
         } else {
             console.error('Request failed with status:', response.status);
@@ -394,8 +395,7 @@ async function postData(username, userData) {
     }
 }
 async function postScore(score) {
-    const apiUrl = 'https://asianunited.stu.nighthawkcodingsociety.com/api/scores/';
-
+    apiUrl = `https://asianunited.stu.nighthawkcodingsociety.com/api/scores/`;
     try {
         const response = await fetch(apiUrl, {
             method: 'POST',
@@ -407,7 +407,7 @@ async function postScore(score) {
 
         if (response.ok) {
             const result = await response.json();
-            console.log(result.message); // Log the response message
+            console.log(result.message);
             alert("Score saved successfully!");
         } else {
             console.error('Request failed with status:', response.status);
@@ -418,8 +418,7 @@ async function postScore(score) {
 }
 
 async function loadUserData(username) {
-        const apiUrl = 'https://https://asianunited.stu.nighthawkcodingsociety.com/api/scores/users/${username}/';
-
+        apiUrl = `https://asianunited.stu.nighthawkcodingsociety.com/api/scores/users/${username}/`;
         try {
             const response = await fetch(apiUrl, {
                 method: 'GET',
@@ -432,7 +431,7 @@ async function loadUserData(username) {
                 const userData = await response.json();
                 console.log('User data loaded successfully:', userData);
 
-                // Update HTML elements and variables
+                // Update variables
                 cost = userData.cost;
                 dbCost = userData.dbCost;
                 clickerCost = userData.clickerCost;
@@ -443,7 +442,7 @@ async function loadUserData(username) {
                 plusCount = userData.plusCount;
 
 
-                // Update the display of HTML elements
+                // Update HTML display
                 document.getElementById("xclickerCount").innerHTML = "x" + clickerCount;
                 document.getElementById('xdbCount').innerHTML = "x" + Number((doubleCount*20).toFixed(0));
                 document.getElementById('cookieDisplay').innerHTML = count + ' Alex Coins';
@@ -451,7 +450,6 @@ async function loadUserData(username) {
                 document.getElementById('newCost').innerHTML = 'Next increase: ' + cost;
                 document.getElementById('newClicker').innerHTML = 'Next increase: ' + clickerCost;
                 document.getElementById('newdbCost').innerHTML = 'Next Increase: ' + dbCost;
-                // Update other HTML elements as needed
 
                 alert('User data loaded successfully!');
             } else if (response.status === 404) {
@@ -468,7 +466,7 @@ async function loadUserData(username) {
         }
     }
 
-    // Event listener for the Load User Data button
+    // Event listener for the loadUserData button
     const loadUserDataButton = document.getElementById('loadUserDataButton');
     loadUserDataButton.addEventListener('click', () => {
         const loadUserInput = document.getElementById('loadUserInput');

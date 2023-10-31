@@ -372,7 +372,7 @@ async function saveUserData() {
 }
 userList = []
 async function postData(username, userData) {
-    apiUrl = 'https://asianunited.stu.nighthawkcodingsociety.com/api/scores/users/${username}/'
+    apiUrl = `https://asianunited.stu.nighthawkcodingsociety.com/api/scores/users/${username}/`;
     try {
         const response = await fetch(apiUrl, {
             method: 'POST',
@@ -394,8 +394,7 @@ async function postData(username, userData) {
     }
 }
 async function postScore(score) {
-    const apiUrl = 'https://asianunited.stu.nighthawkcodingsociety.com/api/scores/';
-
+    apiUrl = `https://asianunited.stu.nighthawkcodingsociety.com/api/scores/`;
     try {
         const response = await fetch(apiUrl, {
             method: 'POST',
@@ -418,8 +417,7 @@ async function postScore(score) {
 }
 
 async function loadUserData(username) {
-        const apiUrl = 'https://https://asianunited.stu.nighthawkcodingsociety.com/api/scores/users/${username}/';
-
+        apiUrl = `https://asianunited.stu.nighthawkcodingsociety.com/api/scores/users/${username}/`;
         try {
             const response = await fetch(apiUrl, {
                 method: 'GET',
