@@ -1,7 +1,7 @@
 <html>
-<input type="text" id="loadUserInput" placeholder="Enter username">
+<input type="text" id="loadUserInput" placeholder="Enter username" value = "exampleuser">
 <button id="loadUserDataButton">Load User Data</button>
-<input type="text" id="usernameInput" placeholder="Enter your username">
+<input type="text" id="usernameInput" placeholder="Enter your username" value = "exampleuser">
 <button onclick="saveUserData()">Save</button>   
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <head>
@@ -470,7 +470,7 @@ async function loadUserData(username) {
     const loadUserDataButton = document.getElementById('loadUserDataButton');
     loadUserDataButton.addEventListener('click', () => {
         const loadUserInput = document.getElementById('loadUserInput');
-        const username = loadUserInput.value;
+        const username = loadUserInput.value; 
 
         if (username) {
             loadUserData(username);

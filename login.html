@@ -47,7 +47,8 @@
     <!-- Content for Login Page -->
     <div class="login-container">
         <h1>Login</h1>
-        <form method="post" action="process_login.php">
+        <!--<form method="post" action="process_login.php"> -->
+            <form method="post" onsubmit="checkLogin(); return false;">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required><br>
 
@@ -64,3 +65,19 @@
     <!-- Include any footer content if needed -->
 </body>
 </html>
+<script>
+function checkLogin() {
+    // Get the values from the username and password input fields
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+
+    // Check if the username and password are valid
+    if (username === "exampleuser" && password === "apassword") {
+        // Redirect the user to a certain URL (e.g., game.html)
+        window.location.href = "game.html";
+    } else {
+        // Display an error message or take other actions
+        alert("Invalid username or password. Please try again.");
+    }
+}
+</script>
