@@ -11,9 +11,11 @@
 .cookieDisplay{
     font-size: larger;
     background-color: transparent;
-    display: inline
+    display: inline;
+    color: white;
 }
 .container{
+    color: white;
     border: none;
     border-radius: 15px;
     background-color: #421768;
@@ -21,6 +23,7 @@
     display: inline
 }
 body {
+    color: white;
     background-image: url("/images/background2.png");
     background-repeat: no-repeat;
     background-size: cover;
@@ -55,8 +58,8 @@ body {
     height: 290px;
     transition-duration:0.05s;
 }
-
 button {
+    color: white;
     border-radius: 15px;
     padding: 28px 28px;
     display: inline-block;
