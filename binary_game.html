@@ -124,6 +124,7 @@
     function moveon() {
         var next = document.getElementById("next")
         var number = document.getElementById("randomNumber")
+        var check  = document.getElementById("check")
         document.getElementById("b0").innerHTML = "0"
         document.getElementById("b1").innerHTML = "0"
         document.getElementById("b2").innerHTML = "0"
@@ -132,6 +133,7 @@
         document.getElementById("b5").innerHTML = "0"
         document.getElementById("para").innerHTML = "";
         next.style.display = "none"
+        check.style.display = "block"
         randNumber = randnum()
         number.innerHTML = "Number " + randNumber
     }
@@ -200,6 +202,8 @@
         if (value === randNumber) {
             var next = document.getElementById("next")
             var sc = document.getElementById("sc")
+            var check = document.getElementById("check")
+            check.style.display = "none"
             next.style.display = "inline-block"
             document.getElementById("para").innerHTML = "Correct!";
             score += 1
@@ -208,12 +212,11 @@
 
 
         } 
-        if (attempts == 0) {
+        if (attempts <= 0) {
             var a = document.getElementById("attempt")
             attempts -= 1
             a.innerHTML = "Attempts Left: " + (attempts + 1)
             gameover()
-            return
         }
         
         else {
