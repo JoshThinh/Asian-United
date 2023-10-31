@@ -14,12 +14,23 @@ var cost = 100;
 var clickerCost = 1000;
 var clickerCount = 0;
 var doubleCount = 0;
+var alexDollars = 0
 var dbCost = 1500;
 var plusCount = 0;
 var twoDouble = 0;
 async function sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
    }
+function escape() {
+  if (alexDollars >= 100){
+    alert("Nice job bro!");
+    alexDollars = alexDollars - 100
+  }
+  else if (alexDollars < 100){
+    alert("HAHAHAHA, YOU HAVEN'T BEEN COUNTING HAVE YOU? YOU NOW HAVE 0 ALEX DOLLARS AND HAVE TO REGAIN THEM ALL AGAIN")
+    alexDollars = 0
+  }
+  }
 function dbChance() { 
   if (count >= dbCost && doubleCount < 4.999){
     count = count - dbCost
@@ -172,6 +183,7 @@ async function gacha() {
           dbCount++;
         } else if (rollCount[i] == "ALEX DOLLAR") {
           alexCount++;
+          alexDollars++;
           disableScroll();
           document.getElementById("alexdollar").scrollIntoView({behavior: 'smooth'});
           await sleep (500);
@@ -220,10 +232,13 @@ async function gacha() {
      // Reset the flag when the roll is complete
   }
 }
+function dollargen(){
+  alexDollars += 11;
+}
 clickers();
 </script>
 <body style = "height: 500vh">
-<center><p id = "cookieDisplay" class = "cookieDisplay">Hello! Click the cookie to get coins!</p></center>
+<center><div class = "container"><p id = "cookieDisplay" class = "cookieDisplay">Hello! Click the cookie to get coins!</p></div></center>
 <img src="/images/alex.png" onclick="swapper()" class = "cookie">
 <button onclick = "addGen()" id = "buy1"><img src = "/images/plus.png" class = "icon"><p id = xplusCount></p></button>
 <p id = newCost></p>
@@ -239,13 +254,16 @@ clickers();
 <br><br>
 </body>
 <br><br>
-<button onclick = "dev()">dev butotn</button>
+<button onclick = "dev()">gives cookies for testing purposes</button>
+<button onclick = "escape()">Have you been counting? Requires 100 Alex Dollars...</button>
+<button onclick = "dollargen()">generates 11 alex dollars for testing purposes</button>
 <center><p id = "joke" class = "joke"></p></center><section id = gachaSec></section>
 <br><br><br><br>
 <center><button onclick = "gacha()" id = "gachaButton" class = "gachaButton"><img src = "/images/alexgacha.jpg" class = "gacha"><center><strong><p style = "color: red; font-size: large; padding: 18px" >Cost: 100,000 Alex Coins</p></strong></center></button>
 <p id = rolls></p>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><section id = "alexdollar"></section><br><br><br><br><br><br><br><br><br><br>
 <img src = "/images/alexdollar.png" style = "position: relative" id = "anim" class = "anim"></center>
+
 </html>     
 
 
