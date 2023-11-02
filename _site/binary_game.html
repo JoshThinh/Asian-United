@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <head>
-        <title>Binary Game</title>
-        <link rel="stylesheet" href="https://joshthinh.github.io/Asian-United-Frontend/style.css" />
-        <script src="https://joshthinh.github.io/Asian-United-Frontend/button.js"></script>
-    </head>
+    <title>Binary Game</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="button.js"></script>
     <body>
         <header class="second-header">
-            <button onclick="game()">Games</button>
-            <button onclick="about()">About</button>
-            <button onclick="home()">Home</button>
+            <div class="box-center-header">
+                <button class="btn-primary-right" onclick="game()">Games</button>
+                <button class="btn-primary" onclick="about()">About</button>
+                <button class="btn-primary-left" onclick="home()">Home</button>
+            </div>
             <hr>
     <style>
         .main-header {
@@ -22,8 +22,6 @@
             max-width: 100%;
             float: left;
         }
-    </style>
-    <style>
         /* Buttons beside start don't appear until start is clicked */
         .binary-button {
             display: none;
@@ -73,18 +71,30 @@
     <button id="check" onclick="check()" style="font-family: 'BD Cartoon Shout';">Check!</button>
     <button id="next" onclick="moveon()" style="font-family: 'BD Cartoon Shout';">Next!</button>
     <p id="para" style="color: white; font-family: 'BD Cartoon Shout';"></p>
+    <br>
+    <br>
+    <h1 style="color: white; font-family: 'BD Cartoon Shout';"></h1>
+    <table id="highScoreTable" style="color: white; font-family: 'BD Cartoon Shout';">
+        <th>
+            <tr>
+                <th style="color: white; font-family: 'BD Cartoon Shout';"></th>
+                <th style="color: white; font-family: 'BD Cartoon Shout';"></th>
+                <th style="color: white; font-family: 'BD Cartoon Shout';"></th>
+            </tr>
+        </th>
+        <tbody id="highScoreBody">
+        </tbody>
+    </table>
 </body>
-<script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js">
     // Your JavaScript code remains unchanged.
 
 
+
+    const username = getCookie("username")
     var randNumber = 0;
     var score = 0;
     var attempts = 2;
-
-    const apiURL = 'https://asianunited.stu.nighthawkcodingsociety.com/api/binary'
-
-
 
     function start() {
         var buttons = document.getElementById("binary-buttons")
@@ -208,6 +218,10 @@
             document.getElementById("para").innerHTML = "Correct!";
             score += 1
             sc.innerHTML = "Score: " + score
+
+            //Saving user data every time they click check
+            saveUserData(username, score)
+
             return
 
 
@@ -294,5 +308,82 @@
         a.innerHTML = "Attemtps Left: " + (attempts + 1)
     
     }
+
+    window.addEventListener('load', () => {
+        highScores();})
+            function getCookie(name) {
+                const cookies = document.cookie.split(";");
+                for (const cookie of cookies) {
+                    const parts = cookie.split("=");
+                    const cookieName = parts[0].trim();
+                    if (cookieName === name) {
+                        return decodeURIComponent(parts[1]);
+                }
+            }
+        }
+
+    
+    function saveUserData(username, score) {
+    // Replace with the actual URL of your Flask API endpoint for updating user data
+        var apiUrl = 'https://asianunited.stu.nighthawkcodingsociety.com/api/players/guess/update';
+
+        // Replace with the user's username
+        var un = username;
+
+        // Create an object with the data to send to the server
+        var data = {
+            username: un,
+            gScore: score
+        };
+
+        // Send a POST request to update the user's data
+        fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => {
+            if (response.status === 200) {
+                // Data saved successfully
+                console.log('User data saved successfully');
+            } else {
+                // Handle errors
+                console.error('Failed to save user data');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    function highScores() {
+        // Fetch high scores from the Flask API
+        $.ajax({
+            url: "https://asianunited.stu.nighthawkcodingsociety.com/api/players/highbinary",  // Use the appropriate URL for high scores
+            method: "GET",
+            dataType: "json",
+            success: function(data) {
+                // Iterate through the high scores and populate the table
+                data.forEach(function(score) {
+                    $("#highScoreBody").append(
+                        "<tr>" +
+                        "<td>" + score.position + "</td>" +
+                        "<td>" + score.username + "</td>" +
+                        "<td>" + score.highscore + "</td>" +
+                        "</tr>"
+                    );
+                });
+            },
+            error: function() {
+                console.log("Failed to fetch high scores.");
+            }
+        });
+    };
+
+    $(document).ready(function() {
+        fetchAndDisplayHighScores();
+    });
 </script>
 </html>

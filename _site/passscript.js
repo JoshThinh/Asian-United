@@ -13,7 +13,7 @@ function authenticateUser() {
         "password": passwordInput
     };
 
-    fetch("http://127.0.0.1:8640/api/login/login", {
+    fetch("https://asianunited.stu.nighthawkcodingsociety.com/api/login/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -23,7 +23,7 @@ function authenticateUser() {
     .then(response => {
         if (response.status === 200) {
             setCookie("username", usernameInput, 30);
-            window.location.href = "/game.html";
+            window.location.href = "https://joshthinh.github.io/Asian-United-Frontend/game.html";
         } else if (response.status === 404) {
             displayError("User not found.");
         } else if (response.status === 401) {
@@ -50,7 +50,7 @@ function registerUser() {
         "password": passwordInput
     };
 
-    fetch("http://127.0.0.1:8640/api/login/register", {
+    fetch("https://asianunited.stu.nighthawkcodingsociety.com/api/login/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
