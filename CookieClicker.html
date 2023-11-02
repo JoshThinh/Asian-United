@@ -263,6 +263,7 @@ clickers();
 <br><br><br><br>
 <center><button onclick = "gacha()" id = "gachaButton" class = "gachaButton"><img src = "/images/alexgacha.jpg" class = "gacha"><center><strong><p style = "color: red; font-size: large; padding: 18px" >Cost: 100,000 Alex Coins</p></strong></center></button>
 <p id = rolls></p>
+</center><div id = "score-list">YOUR TOP TEN PRODUCERS OF ALEX COIN</div><center>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><section id = "alexdollar"></section><br><br><br><br><br><br><br><br><br><br>
 <img src = "/images/alexdollar.png" style = "position: relative" id = "anim" class = "anim"></center>
 
@@ -368,6 +369,7 @@ function enableScroll() {
   loopJoke();
 async function saveUserData() {
   const username = getCookie("username");
+  console.log(username)
     if (!username) {
       const userData = {
         "count": 0,
@@ -379,9 +381,7 @@ async function saveUserData() {
         "dbCost": 1500,
         "plusCount": 0,
     };
-    const userCount = {
-      "count": 0,
-    }
+    const userCount = 0
     await postScore(userCount)
     await postData(username, userData);
     }
@@ -397,17 +397,16 @@ async function saveUserData() {
         "dbCost": dbCost,
         "plusCount": plusCount,
     };
-    const userCount = {
-      "count": count,
-    }
-    await postScore(userCount)
+    const userCount = count
+    await postScore(username, userCount)
     await postData(username, userData);
   }
     // Send user data to the API
 }
 userList = []
 async function postData(username, userData) {
-    apiUrl = `https://asianunited.stu.nighthawkcodingsociety.com/api/scores/users/${username}/`;
+    //apiUrl = `https://asianunited.stu.nighthawkcodingsociety.com/api/scores/users/${username}/`;
+    apiUrl = `http://127.0.0.1:8640/api/scores/users/${username}/`;
     try {
         const response = await fetch(apiUrl, {
             method: 'POST',
@@ -429,15 +428,21 @@ async function postData(username, userData) {
         console.error('Error:', error);
     }
 }
-async function postScore(userCount) {
-    apiUrl = `https://asianunited.stu.nighthawkcodingsociety.com/api/scores/`;
+async function postScore(username, score) {
+    //apiUrl = `https://asianunited.stu.nighthawkcodingsociety.com/api/scores/`;
+    apiUrl = `http://127.0.0.1:8640/api/scores/`; 
+    const userCount = {
+        "username": username,
+        "score": score,
+      };
+    console.log(userCount)
     try {
         const response = await fetch(apiUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({userCount}),
+            body: JSON.stringify(userCount),
         });
 
         if (response.ok) {
@@ -514,7 +519,49 @@ async function loadUserData(username) {
           }
 
     });
-    
+async function getTopScores() {
+  // Define the API URL
+  const apiUrl = 'http://127.0.0.1:8640/api/scores/';
+
+  try {
+    const response = await fetch(apiUrl);
+    if (response.ok) {
+      const topScores = await response.json();
+      // Assuming the API returns an array of objects with 'username' and 'score' properties
+      const scoreList = document.getElementById('score-list');
+      
+      // Clear the existing content
+      scoreList.innerHTML = '';
+
+      // Create an ordered list element
+      const orderedList = document.createElement('ol');
+      
+      // Iterate through the topScores array and create list items within the ordered list
+      topScores.forEach((score, index) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${score.username}: ${score.score}`;
+        orderedList.appendChild(listItem);
+      });
+
+      // Append the ordered list to the scoreList element
+      scoreList.appendChild(orderedList);
+    } else {
+      console.error('Request failed with status:', response.status);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+// Call the function to get and display top scores when your page loads
+window.addEventListener('load', () => {
+  getTopScores();
+});
+
+
+// Call the function to get and display top scores when your page loads
+window.addEventListener('load', () => {
+  getTopScores();})
     function getCookie(name) {
     const cookies = document.cookie.split(";");
     for (const cookie of cookies) {
@@ -524,6 +571,6 @@ async function loadUserData(username) {
             return decodeURIComponent(parts[1]);
         }
     }
-    return null;
 }
+
 </script>

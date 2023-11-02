@@ -31,7 +31,6 @@ function authenticateUser() {
         } else {
             displayError("Login failed.");
         }
-        return response.json();
     })
     .catch(error => {
         console.error("Error:", error);
@@ -47,8 +46,8 @@ function registerUser() {
     const passwordInput = document.getElementById("signuppass").value;
 
     const userData = {
-        "username": String(usernameInput),
-        "password": String(passwordInput)
+        "username": usernameInput,
+        "password": passwordInput
     };
 
     fetch("http://127.0.0.1:8640/api/login/register", {
