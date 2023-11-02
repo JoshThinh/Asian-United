@@ -8,6 +8,20 @@
     animation: rotation 30s infinite linear;
     position: absolute
 }
+#score-container {
+    position: absolute; /* Position it as needed */
+    left: 0; /* Adjust as needed */
+    display: none; /* Initially hide it */
+    background-color: goldenrod; /* Set a background color with some transparency */
+    padding: 20px;
+    z-index: 1000; /* Set a high z-index to appear on top when visible */
+    box-shadow: 0 2px 5px goldenrod(0, 0, 0, 1);
+  }
+  
+  #score-container.visible {
+    display: block; /* Make it visible when the 'visible' class is applied */
+  }
+  
 .cookieDisplay{
     font-size: larger;
     background-color: transparent;

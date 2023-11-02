@@ -8,7 +8,7 @@
       <button onclick="about()">About</button>
       <button onclick="home()">Home</button>
       <hr>
-<button onclick="saveUserData()">Save</button>   
+<button onclick="saveUserData()">Save</button>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <head>
 <link rel="stylesheet" href="cookiestyle.css">  
@@ -256,6 +256,10 @@ clickers();
 <br><br>
 </body>
 <br><br>
+<div id = "trigger-element" style = "font-size: larger">Leaderboard</div>
+<div id = "score-container">
+<p class = "score-text">YOUR TOP TEN PRODUCERS OF ALEX COIN</p><br><div class = "score-list" id = "score-list"></div>
+</div>
 <button onclick = "dev()">gives cookies for testing purposes</button>
 <button onclick = "escape()">Have you been counting? Requires 100 Alex Dollars...</button>
 <button onclick = "dollargen()">generates 11 alex dollars for testing purposes</button>
@@ -263,7 +267,7 @@ clickers();
 <br><br><br><br>
 <center><button onclick = "gacha()" id = "gachaButton" class = "gachaButton"><img src = "/images/alexgacha.jpg" class = "gacha"><center><strong><p style = "color: red; font-size: large; padding: 18px" >Cost: 100,000 Alex Coins</p></strong></center></button>
 <p id = rolls></p>
-<br><br><br><br><br><br><br><br><br><br><div id = "score-list"></div><br><br><br><br><br><br><br><br><br><br><br><br><br><section id = "alexdollar"></section><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><section id = "alexdollar"></section><br><br><br><br><br><br><br><br><br><br>
 <img src = "/images/alexdollar.png" style = "position: relative" id = "anim" class = "anim"></center>
 
 </html>     
@@ -404,8 +408,8 @@ async function saveUserData() {
 }
 userList = []
 async function postData(username, userData) {
-    //apiUrl = `https://asianunited.stu.nighthawkcodingsociety.com/api/scores/users/${username}/`;
-    apiUrl = `http://127.0.0.1:8640/api/scores/users/${username}/`;
+    apiUrl = `https://asianunited.stu.nighthawkcodingsociety.com/api/scores/users/${username}/`;
+    //apiUrl = `http://127.0.0.1:8640/api/scores/users/${username}/`;
     try {
         const response = await fetch(apiUrl, {
             method: 'POST',
@@ -428,8 +432,8 @@ async function postData(username, userData) {
     }
 }
 async function postScore(username, score) {
-    //apiUrl = `https://asianunited.stu.nighthawkcodingsociety.com/api/scores/`;
-    apiUrl = `http://127.0.0.1:8640/api/scores/`; 
+    apiUrl = `https://asianunited.stu.nighthawkcodingsociety.com/api/scores/`;
+    //apiUrl = `http://127.0.0.1:8640/api/scores/`; 
     const userCount = {
         "username": username,
         "score": score,
@@ -519,8 +523,7 @@ async function loadUserData(username) {
 
     });
 async function getTopScores() {
-  // Define the API URL
-  const apiUrl = 'http://127.0.0.1:8640/api/scores/';
+  const apiUrl = 'https://asianunited.stu.nighthawkcodingsociety.com/api/scores/';
 
   try {
     const response = await fetch(apiUrl);
@@ -571,5 +574,21 @@ window.addEventListener('load', () => {
         }
     }
 }
+const triggerElement = document.getElementById('trigger-element');
+
+triggerElement.addEventListener('mouseover', () => {
+  getTopScores();
+  const leaderboardContainer = document.getElementById('score-container');
+  leaderboardContainer.classList.add('visible');
+
+  // Fetch and populate the leaderboard (use your existing code)
+  // async function getTopScores() { ... }
+  // getTopScores();
+});
+
+triggerElement.addEventListener('mouseout', () => {
+  const leaderboardContainer = document.getElementById('score-container');
+  leaderboardContainer.classList.remove('visible');
+});
 
 </script>
