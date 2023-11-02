@@ -8,61 +8,77 @@ function authenticateUser() {
     const usernameInput = document.getElementById("username").value;
     const passwordInput = document.getElementById("password").value;
 
-    const user = users.find(u => u.username === usernameInput && u.password === passwordInput);
-    setCookie("username", usernameInput, 30)
-    //if (user) {
-      //  fetch(apiUrl)
-        //    .then(response => response.json())
-          //  .then(data => {
-            //    displayUserData(data);
-    //        })
-      //      .catch(error => {
-        //        displayError("Error fetching data from the API.");
- //           });
-   // } else {
-     //   displayError("Invalid username or password.");
-   // }
-    //const username = document.getElementById("username").value; // Get the username from the input field
-    //getUserData(username);
-}
+    const userData = {
+        "username": usernameInput,
+        "password": passwordInput
+    };
 
-function getUserData(username) {
-    const userApiUrl = `${apiUrl}/users/${username}`; // Construct the user-specific API URL
-    fetch(userApiUrl, {
-        method: 'GET',
+    fetch("http://127.0.0.1:8640/api/login/login", {
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json"
         },
+        body: JSON.stringify(userData)
     })
     .then(response => {
-        if (response.status === 404) {
-            displayError("User data not found.");
-            return;
+        if (response.status === 200) {
+            setCookie("username", usernameInput, 30);
+            window.location.href = "/game.html";
+        } else if (response.status === 404) {
+            displayError("User not found.");
+        } else if (response.status === 401) {
+            displayError("Invalid password.");
+        } else {
+            displayError("Login failed.");
         }
         return response.json();
     })
-    .then(data => {
-        // Handle the received user-specific data (data) here
-        displayUserData(data);
-    })
     .catch(error => {
-        displayError("Error fetching user data from the API.");
+        console.error("Error:", error);
     });
 }
 
-function displayUserData(userData) {
-    // Display user-specific data on the HTML page
-    const output = document.getElementById("output");
-    output.innerHTML = JSON.stringify(userData, null, 2);
+function isUsernameTaken(username) {
+    // Check if the username already exists in your list of users
+    return users.some(u => u.username === username);
 }
-function displayError(errorMessage) {
-    const output = document.getElementById("output");
-    output.innerHTML = `<p style="color: red">${errorMessage}</p>`;
+function registerUser() {
+    const usernameInput = document.getElementById("signupuser").value;
+    const passwordInput = document.getElementById("signuppass").value;
+
+    const userData = {
+        "username": String(usernameInput),
+        "password": String(passwordInput)
+    };
+
+    fetch("http://127.0.0.1:8640/api/login/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userData)
+    })
+    .then(response => {
+        if (response.status === 201) {
+            alert("Registration successful. You can now log in.");
+        } else if (response.status === 409) {
+            alert("Username is already taken. Please choose a different one.");
+        } else {
+            alert("Registration failed.");
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
 }
-// ... (your other functions)
+
 function setCookie(name, value, days) {
     const date = new Date();
     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
     const expires = "expires=" + date.toUTCString();
     document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+function displayError(errorMessage) {
+    const output = document.getElementById("output");
+    output.innerHTML = `<p style="color: red">${errorMessage}</p>`;
 }
