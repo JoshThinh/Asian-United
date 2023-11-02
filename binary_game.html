@@ -75,18 +75,43 @@
     <button id="check" onclick="check()" style="font-family: 'BD Cartoon Shout';">Check!</button>
     <button id="next" onclick="moveon()" style="font-family: 'BD Cartoon Shout';">Next!</button>
     <p id="para" style="color: white; font-family: 'BD Cartoon Shout';"></p>
+    <br>
+    <br>
+    <h1 style="color: white; font-family: 'BD Cartoon Shout';">High Scores</h1>
+    <table id="highScoreTable" style="color: white; font-family: 'BD Cartoon Shout';">
+        <thead>
+            <tr>
+                <th style="color: white; font-family: 'BD Cartoon Shout';">Position</th>
+                <th style="color: white; font-family: 'BD Cartoon Shout';">Username</th>
+                <th style="color: white; font-family: 'BD Cartoon Shout';">High Score</th>
+            </tr>
+        </thead>
+        <tbody id="highScoreBody">
+        </tbody>
+    </table>
 </body>
 <script>
     // Your JavaScript code remains unchanged.
 
+    function getCookie(name) {
+        const cookieName = name + "=";
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i];
+            while (cookie.charAt(0) === ' ') {
+                cookie = cookie.substring(1);
+            }
+            if (cookie.indexOf(cookieName) === 0) {
+                return cookie.substring(cookieName.length, cookie.length);
+            }
+        }
+        return "";
+    }
 
+    const username = getCookie("username")
     var randNumber = 0;
     var score = 0;
     var attempts = 2;
-
-    const apiURL = 'https://asianunited.stu.nighthawkcodingsociety.com/api/binary'
-
-
 
     function start() {
         var buttons = document.getElementById("binary-buttons")
@@ -210,6 +235,10 @@
             document.getElementById("para").innerHTML = "Correct!";
             score += 1
             sc.innerHTML = "Score: " + score
+
+            //Saving user data every time they click check
+            saveUserData(username, score)
+
             return
 
 
@@ -296,5 +325,82 @@
         a.innerHTML = "Attemtps Left: " + (attempts + 1)
     
     }
+
+    window.addEventListener('load', () => {
+        highScores();})
+            function getCookie(name) {
+            const cookies = document.cookie.split(";");
+            for (const cookie of cookies) {
+                const parts = cookie.split("=");
+                const cookieName = parts[0].trim();
+                if (cookieName === name) {
+                    return decodeURIComponent(parts[1]);
+                }
+            }
+        }
+
+    
+    function saveUserData(username, score) {
+    // Replace with the actual URL of your Flask API endpoint for updating user data
+        var apiUrl = 'https://asianunited.stu.nighthawkcodingsociety.com/api/players/guess/update';
+
+        // Replace with the user's username
+        var username = 'user123';
+
+        // Create an object with the data to send to the server
+        var data = {
+            username: username,
+            gScore: score
+        };
+
+        // Send a POST request to update the user's data
+        fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => {
+            if (response.status === 200) {
+                // Data saved successfully
+                console.log('User data saved successfully');
+            } else {
+                // Handle errors
+                console.error('Failed to save user data');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    function highScores() {
+        // Fetch high scores from the Flask API
+        $.ajax({
+            url: "https://asianunited.stu.nighthawkcodingsociety.com/api/players/highbinary",  // Use the appropriate URL for high scores
+            method: "GET",
+            dataType: "json",
+            success: function(data) {
+                // Iterate through the high scores and populate the table
+                data.forEach(function(score) {
+                    $("#highScoreBody").append(
+                        "<tr>" +
+                        "<td>" + score.position + "</td>" +
+                        "<td>" + score.username + "</td>" +
+                        "<td>" + score.highscore + "</td>" +
+                        "</tr>"
+                    );
+                });
+            },
+            error: function() {
+                console.log("Failed to fetch high scores.");
+            }
+        });
+    };
+
+    $(document).ready(function() {
+        fetchAndDisplayHighScores();
+    });
 </script>
 </html>
