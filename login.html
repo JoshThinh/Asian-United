@@ -48,16 +48,19 @@
     <div class="login-container">
         <h1>Login</h1>
         <!--<form method="post" action="process_login.php"> -->
-            <form method="post" onsubmit="checkLogin(); return false;">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required><br>
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br>
-
-            <!-- Add more form fields as needed -->
-
-            <input type="submit" value="Login">
+            <form id="loginForm">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required><br>
+        
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required><br>
+        
+                <button type="button" onclick="authenticateUser()">Login</button>
+            </form>
+        
+            <div id="output"></div>
+        
+            <script src="passscript.js"></script>
         </form>
     </div>
     <button class="login-guest-button"><a href="game.html">Login as Guest</a></button>

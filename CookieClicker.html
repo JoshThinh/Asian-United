@@ -4,14 +4,10 @@
 </head>
 <body>
   <header class="second-header">
-      <link rel="stylesheet" href="style.css" />
-      <button onclick="game()">Games</button>
+      <button onclick="game()"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <A>              </A>>Games</button>
       <button onclick="about()">About</button>
       <button onclick="home()">Home</button>
       <hr>
-<input type="text" id="loadUserInput" placeholder="Enter username" value = "exampleuser" style = "background-color: #401E5E; border-color: #401E5E; ">
-<button id="loadUserDataButton">Load User Data</button>
-<input type="text" id="usernameInput" placeholder="Enter your username" value = "exampleuser" style = "background-color: #401E5E; border-color: #401E5E; ">
 <button onclick="saveUserData()">Save</button>   
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <head>
@@ -371,28 +367,43 @@ function enableScroll() {
   setTimeout(updateJokeElement, 0);
   loopJoke();
 async function saveUserData() {
-    const username = document.getElementById("usernameInput").value;
+  const username = getCookie("username");
     if (!username) {
-        alert("Please enter a username.");
-        return;
-    }
-    // Collect user-specific data
-    const userData = {
-        count: count,
-        rate: rate,
-        cost: cost,
-        clickerCost: clickerCost,
-        clickerCount: clickerCount,
-        doubleCount: doubleCount,
-        dbCost: dbCost,
-        plusCount: plusCount,
+      const userData = {
+        "count": 0,
+        "rate": 1,
+        "cost": 100,
+        "clickerCost": 1000,
+        "clickerCount": 0,
+        "doubleCount": 0,
+        "dbCost": 1500,
+        "plusCount": 0,
     };
     const userCount = {
-      count: count,
+      "count": 0,
     }
-    // Send user data to the API
-    await postScore(count)
+    await postScore(userCount)
     await postData(username, userData);
+    }
+    // Collect user-specific data
+    else {
+    const userData = {
+        "count": count,
+        "rate": rate,
+        "cost": cost,
+        "clickerCost": clickerCost,
+        "clickerCount": clickerCount,
+        "doubleCount": doubleCount,
+        "dbCost": dbCost,
+        "plusCount": plusCount,
+    };
+    const userCount = {
+      "count": count,
+    }
+    await postScore(userCount)
+    await postData(username, userData);
+  }
+    // Send user data to the API
 }
 userList = []
 async function postData(username, userData) {
@@ -418,7 +429,7 @@ async function postData(username, userData) {
         console.error('Error:', error);
     }
 }
-async function postScore(score) {
+async function postScore(userCount) {
     apiUrl = `https://asianunited.stu.nighthawkcodingsociety.com/api/scores/`;
     try {
         const response = await fetch(apiUrl, {
@@ -426,7 +437,7 @@ async function postScore(score) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ score: score }),
+            body: JSON.stringify({userCount}),
         });
 
         if (response.ok) {
@@ -491,15 +502,28 @@ async function loadUserData(username) {
     }
 
     // Event listener for the loadUserData button
-    const loadUserDataButton = document.getElementById('loadUserDataButton');
-    loadUserDataButton.addEventListener('click', () => {
-        const loadUserInput = document.getElementById('loadUserInput');
-        const username = loadUserInput.value; 
-
+        window.addEventListener('load', () => {
+        const username = getCookie("username");
         if (username) {
-            loadUserData(username);
+        loadUserData(username);
+    // You can use the retrieved username as needed on this page.
+        console.log("Username from the cookie: " + username);
         } else {
-            alert('Please enter a valid username.');
-        }
+    // Handle the case where the cookie is not present.
+        console.log("Username cookie not found.");
+          }
+
     });
+    
+    function getCookie(name) {
+    const cookies = document.cookie.split(";");
+    for (const cookie of cookies) {
+        const parts = cookie.split("=");
+        const cookieName = parts[0].trim();
+        if (cookieName === name) {
+            return decodeURIComponent(parts[1]);
+        }
+    }
+    return null;
+}
 </script>
