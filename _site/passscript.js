@@ -23,7 +23,7 @@ function authenticateUser() {
     .then(response => {
         if (response.status === 200) {
             setCookie("username", usernameInput, 30);
-            window.location.href = "/game.html";
+            window.location.href = "/Asian-United-Frontend/game.html";
         } else if (response.status === 404) {
             displayError("User not found.");
         } else if (response.status === 401) {

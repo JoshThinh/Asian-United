@@ -38,7 +38,7 @@
 }
 body {
     color: white;
-    background-image: url("/images/background2.png");
+    background-image: url("Asian-United-Frontend/images/background2.png");
     background-repeat: no-repeat;
     background-size: cover;
 }
