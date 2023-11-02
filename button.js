@@ -1,11 +1,11 @@
 function game() {
-    window.location.href = 'game.html'; 
+    window.location.href = 'https://joshthinh.github.io/Asian-United-Frontend/game.html'; 
 }
 
 function home() {
-    window.location.href = 'index.html'; 
+    window.location.href = 'https://joshthinh.github.io/Asian-United-Frontend/index.html'; 
 }
 
 function about() {
-    window.location.href = 'about.html'; 
+    window.location.href = 'https://joshthinh.github.io/Asian-United-Frontend/about.html'; 
 }
