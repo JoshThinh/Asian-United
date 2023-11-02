@@ -1,11 +1,11 @@
 function game() {
-    window.location.href = 'Asian-United-Frontend/game.html'; 
+    window.location.href = 'game.html'; 
 }
 
 function home() {
-    window.location.href = 'Asian-United-Frontend/index.html'; 
+    window.location.href = 'index.html'; 
 }
 
 function about() {
-    window.location.href = 'Asian-United-Frontend/about.html'; 
+    window.location.href = 'about.html'; 
 }

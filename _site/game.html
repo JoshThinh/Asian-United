@@ -2,10 +2,10 @@
 <html>
 <head>
     <title>Asian.inc</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://joshthinh.github.io/Asian-United-Frontend/style.css" />
     <style>
         .main-header {
-            background-image: url(images/background.png);
+            background-image: url("https://joshthinh.github.io/Asian-United-Frontend/images/background.png");
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
@@ -19,24 +19,62 @@
             margin-top: 20px;
             margin-left: 20px;
         }
+
+        .game-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
     </style>
 </head>
 <body>
     <header class="second-header">
-        <button onclick="navigate('game.html')">Games</button>
-        <button onclick="navigate('about.html')">About</button>
-        <button onclick="navigate('index.html')">Home</button>
+        <button onclick="navigate('Asian-United-Frontend/game.html')">Games</button>
+        <button onclick="navigate('Asian-United-Frontend/about.html')">About</button>
+        <button onclick="navigate('Asian-United-Frontend/index.html')">Home</button>
         <hr>
         <h1>
             <div class="box">GAMES</div>
-            <button onclick="navigate('guess_game.html')">Battleship Game</button>
-            <button onclick="navigate('feeling-funny.html')">Im Feelin' Funny</button>
-            <button onclick="navigate('binary_game.html')">Binary Game</button>
-            <button onclick="navigate('CookieClicker.html')">Cookie Clicker</button>
-            <button onclick="navigate('aim_trainer.html')">Aim Trainer</button>
+<<<<<<< HEAD
+            <button onclick="navigate('Asian-United-Frontend/guess_game.html')">Battleship Game</button>
+            <button onclick="navigate('Asian-United-Frontend/feeling-funny.html')">Im Feelin' Funny</button>
+            <button onclick="navigate('Asian-United-Frontend/binary_game.html')">Binary Game</button>
+            <button onclick="navigate('Asian-United-Frontend/CookieClicker.html')">Cookie Clicker</button>
+            <button onclick="navigate('Asian-United-Frontend/aim_trainer.html')">Aim Trainer</button>
+=======
+            <div class="game-button">
+                <a href="guess_game.html">
+                    <img src="images/X.png" alt="Battleship Game" width="100" height="100">
+                </a>
+                <button onclick="navigate('guess_game.html')">Battleship Game</button>
+            </div>
+            <div class="game-button">
+                <a href="feeling-funny.html">
+                    <img src="images/Funny.png" alt="Feeling Funny Game" width="100" height="100">
+                </a>
+                <button onclick="navigate('feeling-funny.html')">Im Feelin' Funny</button>
+            </div>
+            <div class="game-button">
+                <a href="binary_game.html">
+                    <img src="images/Binary.png" alt="Binary Game" width="100" height="100">
+                </a>
+                <button onclick="navigate('binary_game.html')">Binary Game</button>
+            </div>
+            <div class="game-button">
+                <a href="CookieClicker.html">
+                    <img src="images/Cookie.png" alt="Cookie Clicker" width="100" height="100">
+                </a>
+                <button onclick="navigate('CookieClicker.html')">Cookie Clicker</button>
+            </div>
+            <div class="game-button">
+                <a href="aim_trainer.html">
+                    <img src="images/Aim.png" alt="Aim Trainer" width="100" height="100">
+                </a>
+                <button onclick="navigate('aim_trainer.html')">Aim Trainer</button>
+            </div>
+>>>>>>> 435f6c5026459ca67558dcd210dc7e79f44232ff
         </h1>
     </header>
-
 
     <script>
         function navigate(url) {
@@ -44,5 +82,4 @@
         }
     </script>
 </body>
-
 </html>
