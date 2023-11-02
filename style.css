@@ -36,6 +36,14 @@
       max-width: 100%;
       float: left;
   }
+
+  .btn-primary {
+    transition: border-width 0.6s linear;
+    background-color: transparent; 
+    color:white;
+    margin:5px;
+    font-size: 20px;
+}
   
   .button {
       display: inline-block;
