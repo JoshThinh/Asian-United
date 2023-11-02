@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <head>
-        <title>Binary Game</title>
-        <link rel="stylesheet" href="style.css" />
-        <script src="button.js"></script>
-    </head>
+    <title>Binary Game</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="button.js"></script>
     <body>
         <header class="second-header">
             <div class="box-center-header">
@@ -24,8 +22,6 @@
             max-width: 100%;
             float: left;
         }
-    </style>
-    <style>
         /* Buttons beside start don't appear until start is clicked */
         .binary-button {
             display: none;
@@ -77,36 +73,23 @@
     <p id="para" style="color: white; font-family: 'BD Cartoon Shout';"></p>
     <br>
     <br>
-    <h1 style="color: white; font-family: 'BD Cartoon Shout';">High Scores</h1>
+    <h1 style="color: white; font-family: 'BD Cartoon Shout';"></h1>
     <table id="highScoreTable" style="color: white; font-family: 'BD Cartoon Shout';">
-        <thead>
+        <th>
             <tr>
-                <th style="color: white; font-family: 'BD Cartoon Shout';">Position</th>
-                <th style="color: white; font-family: 'BD Cartoon Shout';">Username</th>
-                <th style="color: white; font-family: 'BD Cartoon Shout';">High Score</th>
+                <th style="color: white; font-family: 'BD Cartoon Shout';"></th>
+                <th style="color: white; font-family: 'BD Cartoon Shout';"></th>
+                <th style="color: white; font-family: 'BD Cartoon Shout';"></th>
             </tr>
-        </thead>
+        </th>
         <tbody id="highScoreBody">
         </tbody>
     </table>
 </body>
-<script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js">
     // Your JavaScript code remains unchanged.
 
-    function getCookie(name) {
-        const cookieName = name + "=";
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            let cookie = cookies[i];
-            while (cookie.charAt(0) === ' ') {
-                cookie = cookie.substring(1);
-            }
-            if (cookie.indexOf(cookieName) === 0) {
-                return cookie.substring(cookieName.length, cookie.length);
-            }
-        }
-        return "";
-    }
+
 
     const username = getCookie("username")
     var randNumber = 0;
@@ -329,12 +312,12 @@
     window.addEventListener('load', () => {
         highScores();})
             function getCookie(name) {
-            const cookies = document.cookie.split(";");
-            for (const cookie of cookies) {
-                const parts = cookie.split("=");
-                const cookieName = parts[0].trim();
-                if (cookieName === name) {
-                    return decodeURIComponent(parts[1]);
+                const cookies = document.cookie.split(";");
+                for (const cookie of cookies) {
+                    const parts = cookie.split("=");
+                    const cookieName = parts[0].trim();
+                    if (cookieName === name) {
+                        return decodeURIComponent(parts[1]);
                 }
             }
         }
@@ -345,11 +328,11 @@
         var apiUrl = 'https://asianunited.stu.nighthawkcodingsociety.com/api/players/guess/update';
 
         // Replace with the user's username
-        var username = 'user123';
+        var un = username;
 
         // Create an object with the data to send to the server
         var data = {
-            username: username,
+            username: un,
             gScore: score
         };
 
