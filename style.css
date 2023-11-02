@@ -37,12 +37,37 @@
       float: left;
   }
 
+  .box-center-header {
+    color: white;
+    margin: 0;
+    text-align: center;
+    margin-top: 0px;
+}
+
   .btn-primary {
     transition: border-width 0.6s linear;
     background-color: transparent; 
     color:white;
     margin:5px;
     font-size: 20px;
+}
+
+.btn-primary-left {
+    transition: border-width 0.6s linear;
+    background-color: transparent; 
+    color:white;
+    margin:5px;
+    font-size: 20px;
+    margin-left: 100px;
+}
+
+.btn-primary-right {
+    transition: border-width 0.6s linear;
+    background-color: transparent; 
+    color:white;
+    margin:5px;
+    font-size: 20px;
+    margin-right: 100px;
 }
   
   .button {
