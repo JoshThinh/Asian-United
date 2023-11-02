@@ -28,7 +28,7 @@
   }
   
   .main-header {
-      background-image: url(images/background2.png);
+      background-image: url("https://joshthinh.github.io/Asian-United-Frontend/images/background2.png");
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -96,7 +96,7 @@
   }
   
   .second-header {
-      background-image: url(images/background2.png);
+      background-image: url("https://joshthinh.github.io/Asian-United-Frontend/images/background2.png");
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -136,7 +136,7 @@
   }
   
   .main-header {
-      background-image: url(images/background.png);
+      background-image: url("https://joshthinh.github.io/Asian-United-Frontend/images/background.png");
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -146,7 +146,7 @@
   }
 
    .second-header {
-    background-image: url(images/background2.png);
+    background-image: url("https://joshthinh.github.io/Asian-United-Frontend/images/background2.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -298,7 +298,7 @@
 
 /* Set background2.png as the background image for the body */
 body {
-    background-image: url(images/background2.png);
+    background-image: url("https://joshthinh.github.io/Asian-United-Frontend/images/background2.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
