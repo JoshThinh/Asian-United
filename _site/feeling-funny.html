@@ -6,7 +6,8 @@
   async function loop(){
     while (true){
       await sleep(3000)
-      axios.get('https://asianunited.stu.nighthawkcodingsociety.com/api/jokes/random')
+      //axios.get('https://asianunited.stu.nighthawkcodingsociety.com/api/jokes/random')
+      axios.get('http://127.0.0.1:8640/api/jokes/random')
       .then(response => {
       console.log(response.data);
       document.getElementById('api').textContent = response.data;
