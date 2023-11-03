@@ -1,5 +1,5 @@
-const apiUrl = "https://asianunited.stu.nighthawkcodingsociety.com/api/scores"; // Update with the correct API URL
-
+//const apiUrl = "https://asianunited.stu.nighthawkcodingsociety.com/api/scores"; // Update with the correct API URL
+const apiUrl = "http:127.0.0.1:8640/api/scores";
 const users = [
     { username: "user1", password: "password1" },
     { username: "user2", password: "password2" },
@@ -13,7 +13,8 @@ function authenticateUser() {
         "password": passwordInput
     };
 
-    fetch("https://asianunited.stu.nighthawkcodingsociety.com/api/login/login", {
+    //fetch("https://asianunited.stu.nighthawkcodingsociety.com/api/login/login", {
+    fetch("http://127.0.0.1:8640/api/login/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -50,7 +51,8 @@ function registerUser() {
         "password": passwordInput
     };
 
-    fetch("https://asianunited.stu.nighthawkcodingsociety.com/api/login/register", {
+    //fetch("https://asianunited.stu.nighthawkcodingsociety.com/api/login/register", {
+    fetch("http://127.0.0.1:8640/api/login/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
