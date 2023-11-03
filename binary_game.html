@@ -87,15 +87,16 @@
     </table>
 </body>
 <script>
-    // Your JavaScript code remains unchanged.
-
-
-
+    //Takes the cookie and grabs username from that data
     const username = getCookie("username")
+    //Setting random number to zero for now
     var randNumber = 0;
+    //Score starts at 0 as well
     var score = 0;
+    //User gets 3 attempts actually, once attempts reaches 0 and they run the code it will cost them the game
     var attempts = 2;
 
+    //This is the function to start the game. Gets rid of the start button and the rest of the binary buttons appear by setting their display to inline-block. Other text appears too, like the score, the nmber you are given, and how many attempts you have left.
     function start() {
         var buttons = document.getElementById("binary-buttons")
         var start = document.getElementById("start");
@@ -126,11 +127,13 @@
         a.innerHTML = "Attemtps Left: " + (attempts + 1)
     }
 
+    //This function grabs any random number from 0-63. It only reaches 63 because 32+16+8+4+2+1=63. Uses the Math.floor and Math.random to get an integer value. 
     function randnum() {
         number = Math.floor(Math.random() * 64);
         return number
     }
 
+    //This function is called when the user clicks on the "Next" button. This will reset the buttons to 0 and will get the next random number. 
     function moveon() {
         var next = document.getElementById("next")
         var number = document.getElementById("randomNumber")
@@ -148,7 +151,7 @@
         number.innerHTML = "Number " + randNumber
     }
 
-    // Define a common function for changing button text and style
+    //This function changes all the buttons to 0 or to 1
     function changeZero(buttonId, originalText) {
         var button = document.getElementById(buttonId);
         if (button.innerHTML === originalText) {
@@ -182,6 +185,7 @@
         changeZero("b0", "0");
     }
 
+    //This function checks to see if the answer they input is correct. Using the nuericak values each of the buttons represent, the function adds them up an calculates if the user input the right answer. If it equals the number, the user will earn one point and the "Next" button will appear. 
     function check() {
         var value = 0;
 
@@ -247,6 +251,7 @@
         }
     }
 
+    //This function is called when the user checks their answer and they have 0 attempts left. It displays messages telling them they lost, and the "Try Again!" button. 
     function gameover() {
         var b5 = document.getElementById("b5");
         var b4 = document.getElementById("b4");
@@ -274,6 +279,7 @@
         tryAgain.style.display = "inline-block"
     }
 
+    //This funct8ion resets the user's score and also resets the game so they can play again.
     function restart() {
         var score = 0;
         var attempts = 2;
@@ -309,25 +315,27 @@
     
     }
 
+    //When people open the website, the high scores function is called and will list the top 3 people with the highest scores.
     window.addEventListener('load', () => {
         highScores();})
-            function getCookie(name) {
-                const cookies = document.cookie.split(";");
-                for (const cookie of cookies) {
-                    const parts = cookie.split("=");
-                    const cookieName = parts[0].trim();
-                    if (cookieName === name) {
-                        return decodeURIComponent(parts[1]);
+
+    //Function takes the user data stores in the cookie for username
+    function getCookie(name) {
+        const cookies = document.cookie.split(";");
+            for (const cookie of cookies) {
+                const parts = cookie.split("=");
+                const cookieName = parts[0].trim();
+                if (cookieName === name) {
+                    return decodeURIComponent(parts[1]);
                 }
             }
         }
 
     
+    //Function for posting user data into the backend
     function saveUserData(username, score) {
-    // Replace with the actual URL of your Flask API endpoint for updating user data
         var apiUrl = 'https://asianunited.stu.nighthawkcodingsociety.com/api/players/guess/update';
 
-        // Replace with the user's username
         var un = username;
 
         // Create an object with the data to send to the server
@@ -358,6 +366,7 @@
         });
     }
 
+    //Generates top 3 highest scorers
     function highScores() {
         // Fetch high scores from the Flask API
         $.ajax({
