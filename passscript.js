@@ -25,9 +25,9 @@ function authenticateUser() {
         if (response.status === 200) {
             setCookie("username", usernameInput, 30);
             window.location.href = "https://joshthinh.github.io/Asian-United-Frontend/game.html";
-        } else if (response.status === 404) {
+        } else if (response.status === 400) {
             displayError("User not found.");
-        } else if (response.status === 401) {
+        } else if (response.status === 409) {
             displayError("Invalid password.");
         } else {
             displayError("Login failed.");
