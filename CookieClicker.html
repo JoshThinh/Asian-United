@@ -3,6 +3,7 @@
 <script src="button.js"></script>
 </head>
 <body>
+  <!--Header-->
   <header class="second-header">
     <div class="box-center-header">
       <button class="btn-primary-right" onclick="game()">Games</button>
@@ -12,10 +13,42 @@
       <hr>
 <button onclick="saveUserData()">Save</button>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<head>
+<head> <!--Reference jquery, and my personal stylesheet-->
 <link rel="stylesheet" href="cookiestyle.css">    
 </head>
+<body style = "height: 500vh">
+  <center><div class = "container"><p id = "cookieDisplay" class = "cookieDisplay">Hello! Click the cookie to get coins!</p></div></center>
+  <br><br><br> <!-- calls functions when buttons are clicked, images displayed-->
+  <img src="https://joshthinh.github.io/Asian-United-Frontend/images/alex.png" onclick="swapper()" class = "cookie">
+  <button onclick = "addGen()" id = "buy1"><img src = "https://joshthinh.github.io/Asian-United-Frontend/images/plus.png" class = "icon"><p id = xplusCount></p></button>
+  <p id = newCost></p>
+  <p id = "costMsg"></p>
+  <p>Increases your <br>coins' per click!</p>
+  <button onclick = "buyClicker()" id = "buy2"><img src = "https://joshthinh.github.io/Asian-United-Frontend/images/autoclicker.png" class = "icon"><p id = xclickerCount></p></button>
+  <p id = "clickercostMsg"></p>
+  <p id = "newClicker"></p><!--ids, classes to be referenced by JS and css-->
+  <br>Clicks 1 time for <br>you every second</p>
+  <button onclick = "dbChance()" id = "buy3"><img src = "https://joshthinh.github.io/Asian-United-Frontend/images/double.png" class = "icon"><p id = "xdbCount"></p></button>
+  <p id = newdbCost></p>
+  <p>Adds a chance to <br>increase clicks gained using clickers</p>
+  <br><br>
+  </body>
+  <br><br>
+  <div id = "trigger-element" style = "font-size: larger">Leaderboard</div>
+  <div id = "score-container">
+  <p class = "score-text">YOUR TOP TEN PRODUCERS OF ALEX COIN</p><br><div class = "score-list" id = "score-list"></div> <!--div for leaderboard-->
+  </div>
+  
+  <button onclick = "escape()"><img src = "https://static-00.iconduck.com/assets.00/skull-emoji-2047x2048-dav412jm.png" style = "height: 100px; width: auto;"><br>Have you been counting?<br>Requires 100 Alex Dollars...</button>
+  <center><p id = "joke" class = "joke"></p></center><section id = gachaSec></section>
+  <br><br><br><br>
+  <center><button onclick = "gacha()" id = "gachaButton" class = "gachaButton"><img src = "https://joshthinh.github.io/Asian-United-Frontend/images/alexgacha.jpg" class = "gacha"><center><strong><p style = "color: red; font-size: large; padding: 18px" >Cost: 100,000 Alex Coins</p></strong></center></button>
+  <p id = rolls></p>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><section id = "alexdollar"></section><br><br><br><br><br><br><br><br><br><br>
+  <img src = "https://joshthinh.github.io/Asian-United-Frontend/images/alexdollar.png" style = "position: relative" id = "anim" class = "anim"></center>
+  </html>
 <script>
+//Define all variables
 var count = 0;
 var rate = 1;
 var cost = 100;
@@ -26,9 +59,11 @@ var alexDollars = 0
 var dbCost = 1500;
 var plusCount = 0;
 var twoDouble = 0;
+//Sleep function to add delays
 async function sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
    }
+//Endgame, win function
 function escape() {
   if (alexDollars >= 100){
     alert("Nice job bro!");
@@ -39,18 +74,19 @@ function escape() {
     alexDollars = 0
   }
   }
+//Doubler code
 function dbChance() { 
-  if (count >= dbCost && doubleCount < 4.999){
+  if (count >= dbCost && doubleCount < 4.999){ //max out
     count = count - dbCost
-    dbCost +=1500
+    dbCost +=1500 //cost increase
     doubleCount += 0.05
     //console.log(Number(doubleCount.toFixed(0)))
-    document.getElementById("xdbCount").innerHTML = "x" + Number((doubleCount*20).toFixed(0));
+    document.getElementById("xdbCount").innerHTML = "x" + Number((doubleCount*20).toFixed(0)); //sets display to 20x the count for a good whole number
     document.getElementById("cookieDisplay").innerHTML = count + " Alex Coins";
     document.getElementById("newdbCost").innerHTML = "Next Increase: " + dbCost;
   }
   else {
-        document.getElementById("buy3").animate(
+        document.getElementById("buy3").animate( //turns the button red if not enough money
             [
                 { background: '#ff0000'}
             ] , {
@@ -59,15 +95,15 @@ function dbChance() {
         )
     }
 }
-async function clickers() {
+async function clickers() { //automatically adds to the count after 1 second
     while (true) {
         await sleep(1000);
-        if(probability(doubleCount)) {
+        if(probability(doubleCount)) { //if 1 in doublecount, returns true, multiplier is 2
           multi = 2;
 
           if (probability(doubleCount-1)) {
             multi = 3
-            if (probability(doubleCount-2)) { // 25% chance for quadruple drops
+            if (probability(doubleCount-2)) { // chance for quadruple drops
             multi = 4;
             if (probability(doubleCount-3)) { // chance for quintuple drops
               multi = 5;
@@ -78,18 +114,18 @@ async function clickers() {
             }
           }
         }
-        else { multi = 1}
-        count = count + (rate*clickerCount*multi);
+        else { multi = 1}//if all fails, no multi
+        count = count + (rate*clickerCount*multi); //adds to count
         document.getElementById("cookieDisplay").innerHTML = count + " Alex Coins"   
   }
 }
-var probability = function(n) {
+var probability = function(n) { //probability function
      return !!n && Math.random() <= n;
 }
-function addGen(){
+function addGen(){ //adds to the rate of coins per click
     if (count >= cost){
         count = count - cost
-        cost +=100
+        cost +=100 
         plusCount +=1
         rate +=1
         document.getElementById("xplusCount").innerHTML = "x" + plusCount;
@@ -98,7 +134,7 @@ function addGen(){
     }
     
     else {
-        document.getElementById("buy1").animate(
+        document.getElementById("buy1").animate( //red button if no money
             [
                 { background: '#ff0000'}
             ] , {
@@ -108,21 +144,21 @@ function addGen(){
     }
     }
 function swapper(){
-    count = count + rate
+    count = count + rate //adds coins to display on click based on the rate
     document.getElementById("cookieDisplay").innerHTML = count + " Alex Coins";
 }
 function buyClicker(){
     if (count >= clickerCost){
-        count = count - clickerCost;
+        count = count - clickerCost; //removes money from cost
         clickerCost +=1000;
         clickerCount +=1;
         document.getElementById("xclickerCount").innerHTML = "x" + clickerCount;
-        document.getElementById("cookieDisplay").innerHTML = count + " Alex Coins";
+        document.getElementById("cookieDisplay").innerHTML = count + " Alex Coins"; //updates displays and buttons
         document.getElementById("newClicker").innerHTML = "Next increase: " + clickerCost;
     }
   
     else {
-        document.getElementById("buy2").animate(
+        document.getElementById("buy2").animate( //turns red
             [
                 { background: '#ff0000'}
             ] , {
@@ -132,7 +168,7 @@ function buyClicker(){
     }
   }
   function build() {
-  let matList = [];
+  let matList = []; //unfinished spaceship :(
   let buildList = ["top", "mid", "bot"];
   
   for (let i = 0; i < buildList.length; i++) {
@@ -142,14 +178,14 @@ function buyClicker(){
 }
 
 
-function  dev(){
-    count = 10000000000
-}   
-var rolls = ["Rate Up", "Auto Clicker", "Doubler", "ALEX DOLLAR"];
+//function  dev(){ //gives coins for testing purposes
+//    count = 10000000000
+//}   
+var rolls = ["Rate Up", "Auto Clicker", "Doubler", "ALEX DOLLAR"]; //list of gacha items
 var rollCount = []
-var rolling = false;
+var rolling = false; //check for whether a roll can be performed
 async function gacha() {
-  if (count >= 100000 && !rolling) {
+  if (count >= 100000 && !rolling) { //if has enough money and no rolls are in progress
     rolling = true;
     var rateaddCount = 0;
     var acCount = 0;
@@ -158,12 +194,12 @@ async function gacha() {
 
     count -= 100000;
     var i = 1;
-    document.getElementById("rolls").innerHTML = "You got...<br>";
+    document.getElementById("rolls").innerHTML = "You got...<br>"; 
 
     while (i <= 10) {
       var roll = Math.floor(Math.random() * 100);
       console.log(roll);
-
+      //probability system
       if (roll < 60) {
         rollCount.push(rolls[0]);
       } else if (roll >= 60 && roll <= 90) {
@@ -177,7 +213,7 @@ async function gacha() {
       document.getElementById("rolls").innerHTML += rollCount[i - 1] + "<br>";
       i++;
     }
-
+    //debugging
     console.log(rollCount);
 
     for (var i = 0; i < rollCount.length; i++) {
@@ -193,20 +229,20 @@ async function gacha() {
         disableScroll();
         document.getElementById("alexdollar").scrollIntoView({ behavior: 'smooth' });
         await sleep(500);
-        document.getElementById("anim").animate([
-          { opacity: 0 }, // 0% keyframe
-          { opacity: 0.5 }, // 50% keyframe
-          { opacity: 1 },
+        document.getElementById("anim").animate([ //activates animation if alex dollar is within the list of rolled items
+          { opacity: 0 }, // keyframe
+          { opacity: 0.5 }, // keyframes
+          { opacity: 1 }, //....
           { opacity: 1 },
           { opacity: 1 },
         ], { duration: 3000 });
         await sleep(3000);
-        document.getElementById("gachaSec").scrollIntoView({ behavior: 'smooth' });
-        enableScroll();
+        document.getElementById("gachaSec").scrollIntoView({ behavior: 'smooth' }); //scrolls animation into view
+        enableScroll(); //re enables scrolling
       }
     }
 
-    document.getElementById("rolls").innerHTML +=
+    document.getElementById("rolls").innerHTML += //adds elements, displays them
       "<br>You got " +
       rateaddCount +
       "x Rate Ups, " +
@@ -228,54 +264,18 @@ async function gacha() {
     await sleep(500);
     rolling = false;
   } else if (!rolling) {
-    document.getElementById("gachaButton").animate(
+    document.getElementById("gachaButton").animate( //red animation if a roll is in progress
       [{ background: "#ff0000" }],
       { duration: 20 }
     );
   }
 }
 
-function dollargen(){
-  alexDollars += 11;
-}
-clickers();
+//function dollargen(){ //dev
+//  alexDollars += 11;
+//}
+clickers(); //runs clicker loop
 </script>
-<body style = "height: 500vh">
-<center><div class = "container"><p id = "cookieDisplay" class = "cookieDisplay">Hello! Click the cookie to get coins!</p></div></center>
-<br><br><br>
-<img src="https://joshthinh.github.io/Asian-United-Frontend/images/alex.png" onclick="swapper()" class = "cookie">
-<button onclick = "addGen()" id = "buy1"><img src = "https://joshthinh.github.io/Asian-United-Frontend/images/plus.png" class = "icon"><p id = xplusCount></p></button>
-<p id = newCost></p>
-<p id = "costMsg"></p>
-<p>Increases your <br>coins' per click!</p>
-<button onclick = "buyClicker()" id = "buy2"><img src = "https://joshthinh.github.io/Asian-United-Frontend/images/autoclicker.png" class = "icon"><p id = xclickerCount></p></button>
-<p id = "clickercostMsg"></p>
-<p id = "newClicker"></p>
-<br>Clicks 1 time for <br>you every second</p>
-<button onclick = "dbChance()" id = "buy3"><img src = "https://joshthinh.github.io/Asian-United-Frontend/images/double.png" class = "icon"><p id = "xdbCount"></p></button>
-<p id = newdbCost></p>
-<p>Adds a chance to <br>increase clicks gained using clickers</p>
-<br><br>
-</body>
-<br><br>
-<div id = "trigger-element" style = "font-size: larger">Leaderboard</div>
-<div id = "score-container">
-<p class = "score-text">YOUR TOP TEN PRODUCERS OF ALEX COIN</p><br><div class = "score-list" id = "score-list"></div>
-</div>
-
-<button onclick = "escape()"><img src = "https://static-00.iconduck.com/assets.00/skull-emoji-2047x2048-dav412jm.png" style = "height: 100px; width: auto;"><br>Have you been counting?<br>Requires 100 Alex Dollars...</button>
-<center><p id = "joke" class = "joke"></p></center><section id = gachaSec></section>
-<br><br><br><br>
-<center><button onclick = "gacha()" id = "gachaButton" class = "gachaButton"><img src = "https://joshthinh.github.io/Asian-United-Frontend/images/alexgacha.jpg" class = "gacha"><center><strong><p style = "color: red; font-size: large; padding: 18px" >Cost: 100,000 Alex Coins</p></strong></center></button>
-<p id = rolls></p>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><section id = "alexdollar"></section><br><br><br><br><br><br><br><br><br><br>
-<img src = "https://joshthinh.github.io/Asian-United-Frontend/images/alexdollar.png" style = "position: relative" id = "anim" class = "anim"></center>
-
-</html>     
-
-
-</html>
-
 <script>
   var keys = {37: 1, 38: 1, 39: 1, 40: 1};
 
@@ -365,7 +365,7 @@ function enableScroll() {
   async function loopJoke() {
     while (true) {
       await updateJokeElement();
-      await sleep(30000); // Sleep for 3 seconds (adjust the delay as needed)
+      await sleep(30000); // Sleep for 3 seconds
     }
   }
 
@@ -373,9 +373,9 @@ function enableScroll() {
   setTimeout(updateJokeElement, 0);
   loopJoke();
 async function saveUserData() {
-  const username = getCookie("username");
+  const username = getCookie("username"); //get username cookie from browser data
   console.log(username)
-    if (!username) {
+    if (!username) { //if there is no username, give default values
       const userData = {
         "count": 0,
         "rate": 1,
@@ -387,11 +387,10 @@ async function saveUserData() {
         "plusCount": 0,
     };
     const userCount = 0
-    await postScore(userCount)
+    await postScore(userCount) //post values to API/database
     await postData(username, userData);
     }
-    // Collect user-specific data
-    else {
+    else { 
     const userData = {
         "count": count,
         "rate": rate,
@@ -402,11 +401,10 @@ async function saveUserData() {
         "dbCost": dbCost,
         "plusCount": plusCount,
     };
-    const userCount = count
-    await postScore(username, userCount)
+    const userCount = count 
+    await postScore(username, userCount) //posts user specific data to api
     await postData(username, userData);
   }
-    // Send user data to the API
 }
 userList = []
 async function postData(username, userData) {
@@ -419,16 +417,16 @@ async function postData(username, userData) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(userData),
-        });
+        }); //sends the userData to the api in a post request
 
         if (response.ok) {
             const result = await response.json();
             console.log(result.message); // Log the response message
-            
+            //confirm that it worked
             alert("User data saved successfully!");
         } else {
             console.error('Request failed with status:', response.status);
-        }
+        } //error handling
     } catch (error) {
         console.error('Error:', error);
     }
@@ -448,7 +446,7 @@ async function postScore(username, score) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(userCount),
-        });
+        }); //sends specifically the user's count/score to the api
 
         if (response.ok) {
             const result = await response.json();
@@ -468,7 +466,7 @@ async function loadUserData(username) {
         try {
             const response = await fetch(apiUrl, {
                 method: 'GET',
-                headers: {
+                headers: { //gets userData from the API based on the username inputted
                     'Content-Type': 'application/json',
                 },
             });
@@ -517,7 +515,7 @@ async function loadUserData(username) {
         const username = getCookie("username");
         if (username) {
         loadUserData(username);
-    // You can use the retrieved username as needed on this page.
+        //debugging, make sure usernames are handled correctly
         console.log("Username from the cookie: " + username);
         } else {
     // Handle the case where the cookie is not present.
@@ -561,15 +559,9 @@ async function getTopScores() {
 
 // Call the function to get and display top scores when your page loads
 window.addEventListener('load', () => {
-  getTopScores();
-});
-
-
-// Call the function to get and display top scores when your page loads
-window.addEventListener('load', () => {
   getTopScores();})
     function getCookie(name) {
-    const cookies = document.cookie.split(";");
+    const cookies = document.cookie.split(";"); //grabs the username cookie when the page loads
     for (const cookie of cookies) {
         const parts = cookie.split("=");
         const cookieName = parts[0].trim();
@@ -578,16 +570,16 @@ window.addEventListener('load', () => {
         }
     }
 }
-const triggerElement = document.getElementById('trigger-element');
+const triggerElement = document.getElementById('trigger-element'); //defines the element used to trigger leaderboard
 
-triggerElement.addEventListener('mouseover', () => {
+triggerElement.addEventListener('mouseover', () => { //when the user hovers over the element, show the leaderboard
   getTopScores();
   const leaderboardContainer = document.getElementById('score-container');
   leaderboardContainer.classList.add('visible');
 
 });
 
-triggerElement.addEventListener('mouseout', () => {
+triggerElement.addEventListener('mouseout', () => { //hides leaderboard when user goes off of it
   const leaderboardContainer = document.getElementById('score-container');
   leaderboardContainer.classList.remove('visible');
 });
